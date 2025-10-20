@@ -1,0 +1,279 @@
+/**
+ * CSS spécifique pour la page Demander l'assistance d'une agence
+ */
+
+.assistance-grid {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.assistance-main {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.assistance-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Grille des agences */
+.agences-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+.agence-card {
+    cursor: pointer;
+    position: relative;
+}
+
+.agence-radio {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.agence-content {
+    padding: 1.5rem;
+    border: 2px solid var(--gray-300);
+    border-radius: var(--border-radius);
+    background: var(--white);
+    transition: all 0.2s ease;
+}
+
+.agence-radio:checked + .agence-content {
+    border-color: var(--primary);
+    background: oklch(from var(--primary) l c h / 0.05);
+    box-shadow: 0 0 0 3px oklch(from var(--primary) l c h / 0.1);
+}
+
+.agence-card:hover .agence-content {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px oklch(from var(--gray-900) l c h / 0.08);
+}
+
+.agence-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.agence-icon {
+    width: 32px;
+    height: 32px;
+    color: var(--primary);
+    flex-shrink: 0;
+}
+
+.agence-name {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--gray-900);
+    margin: 0;
+}
+
+.agence-detail {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--gray-600);
+    margin: 0.5rem 0 0 0;
+}
+
+.detail-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+/* Formulaire */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group-full {
+    grid-column: 1 / -1;
+}
+
+.form-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--gray-700);
+}
+
+.form-input,
+.form-textarea {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--gray-300);
+    border-radius: var(--border-radius);
+    font-size: 0.9375rem;
+    color: var(--gray-900);
+    background: var(--white);
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px oklch(from var(--primary) l c h / 0.1);
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+    color: var(--gray-400);
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Sidebar informations */
+.assistance-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.assistance-sidebar .card {
+    position: sticky;
+    top: calc(var(--topbar-height, 0px) + 1rem);
+}
+
+.info-card {
+    background: var(--white);
+}
+
+.info-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.info-step {
+    display: flex;
+    gap: 1rem;
+}
+
+.step-number {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.125rem;
+    flex-shrink: 0;
+}
+
+.step-content {
+    flex: 1;
+}
+
+.step-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--gray-900);
+    margin: 0 0 0.25rem 0;
+}
+
+.step-text {
+    font-size: 0.875rem;
+    color: var(--gray-600);
+    margin: 0;
+    line-height: 1.5;
+}
+
+.info-highlight {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.25rem;
+    background: oklch(from var(--primary) l c h / 0.05);
+    border-left: 4px solid var(--primary);
+    border-radius: var(--border-radius);
+}
+
+.highlight-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--primary);
+    flex-shrink: 0;
+}
+
+.highlight-text {
+    font-size: 0.875rem;
+    color: var(--gray-700);
+    margin: 0;
+    line-height: 1.6;
+}
+
+.highlight-text strong {
+    color: var(--gray-900);
+    font-size: 1rem;
+}
+
+/* Boutons */
+.btn-block {
+    width: 100%;
+}
+
+.btn-lg {
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .assistance-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .assistance-sidebar .card {
+        position: relative;
+        top: auto;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .agences-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .agence-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .info-step {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}

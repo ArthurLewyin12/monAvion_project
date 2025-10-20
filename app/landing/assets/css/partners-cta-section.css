@@ -1,0 +1,246 @@
+/* components/css/partners-cta-section.css */
+
+.partners-cta-section {
+    padding: var(--spacing-24) 0;
+    background: var(--color-gray-50);
+    position: relative;
+    overflow: hidden;
+}
+
+.partners-cta-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-8);
+}
+
+/* === CARTE PARTENAIRE === */
+.partner-cta-card {
+    position: relative;
+    background: var(--color-white);
+    border-radius: var(--radius-3xl);
+    padding: var(--spacing-10);
+    overflow: hidden;
+    border: 2px solid var(--color-gray-200);
+    transition: all var(--transition-base);
+}
+
+.partner-cta-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-2xl);
+    border-color: transparent;
+}
+
+/* Background décoratif */
+.partner-cta-background {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity var(--transition-base);
+    pointer-events: none;
+}
+
+.partner-cta-card:hover .partner-cta-background {
+    opacity: 1;
+}
+
+.partner-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+}
+
+.partner-blob-1 {
+    width: 300px;
+    height: 300px;
+    top: -20%;
+    right: -20%;
+    background: radial-gradient(
+        circle,
+        oklch(from var(--color-primary-400) l c h / 0.15),
+        transparent
+    );
+}
+
+.partner-blob-2 {
+    width: 300px;
+    height: 300px;
+    top: -20%;
+    right: -20%;
+    background: radial-gradient(
+        circle,
+        oklch(from var(--color-secondary-400) l c h / 0.15),
+        transparent
+    );
+}
+
+/* Contenu */
+.partner-cta-content {
+    position: relative;
+    z-index: 10;
+}
+
+.partner-cta-icon {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-2xl);
+    margin-bottom: var(--spacing-6);
+    transition: all var(--transition-base);
+}
+
+.partner-cta-airline .partner-cta-icon {
+    background: linear-gradient(135deg, var(--color-primary-500), var(--color-primary-600));
+    box-shadow: 0 8px 24px oklch(from var(--color-primary-500) l c h / 0.3);
+}
+
+.partner-cta-agency .partner-cta-icon {
+    background: linear-gradient(135deg, var(--color-secondary-500), var(--color-secondary-600));
+    box-shadow: 0 8px 24px oklch(from var(--color-secondary-500) l c h / 0.3);
+}
+
+.partner-cta-icon svg {
+    width: 32px;
+    height: 32px;
+    color: var(--color-white);
+}
+
+.partner-cta-card:hover .partner-cta-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.partner-cta-title {
+    font-size: var(--font-size-3xl);
+    font-weight: 800;
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-4);
+    line-height: 1.2;
+}
+
+.partner-cta-description {
+    font-size: var(--font-size-lg);
+    color: var(--color-gray-600);
+    line-height: 1.7;
+    margin-bottom: var(--spacing-6);
+}
+
+/* Features list */
+.partner-cta-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--spacing-8) 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+}
+
+.partner-cta-features li {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    font-size: var(--font-size-base);
+    color: var(--color-gray-700);
+    font-weight: 500;
+}
+
+.partner-cta-features svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    color: var(--color-success);
+}
+
+/* Boutons CTA */
+.partner-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-4) var(--spacing-8);
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    color: var(--color-white);
+    text-decoration: none;
+    border-radius: var(--radius-full);
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+}
+
+.partner-cta-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        transparent,
+        oklch(from var(--color-white) l c h / 0.2),
+        transparent
+    );
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.partner-cta-btn:hover::before {
+    transform: translateX(100%);
+}
+
+.partner-cta-btn svg {
+    width: 20px;
+    height: 20px;
+    transition: transform var(--transition-base);
+}
+
+.partner-cta-btn:hover svg {
+    transform: translateX(4px);
+}
+
+.partner-cta-btn-airline {
+    background: linear-gradient(135deg, var(--color-primary-500), var(--color-primary-600));
+}
+
+.partner-cta-btn-airline:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-2xl), 0 0 30px oklch(from var(--color-primary-500) l c h / 0.4);
+}
+
+.partner-cta-btn-agency {
+    background: linear-gradient(135deg, var(--color-secondary-500), var(--color-secondary-600));
+}
+
+.partner-cta-btn-agency:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-2xl), 0 0 30px oklch(from var(--color-secondary-500) l c h / 0.4);
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 968px) {
+    .partners-cta-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-6);
+    }
+
+    .partners-cta-section {
+        padding: var(--spacing-16) 0;
+    }
+}
+
+@media (max-width: 640px) {
+    .partner-cta-card {
+        padding: var(--spacing-8) var(--spacing-6);
+    }
+
+    .partner-cta-title {
+        font-size: var(--font-size-2xl);
+    }
+
+    .partner-cta-description {
+        font-size: var(--font-size-base);
+    }
+
+    .partner-cta-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}

@@ -1,0 +1,181 @@
+/**
+ * CSS spécifique pour la page Détail demande
+ */
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.badge-lg {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+}
+
+.detail-header-card {
+    margin-bottom: 1.5rem;
+}
+
+.detail-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.detail-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin: 0;
+}
+
+.detail-subtitle {
+    font-size: 0.875rem;
+    color: var(--gray-600);
+    margin: 0.5rem 0 0 0;
+}
+
+.info-grid {
+    display: grid;
+    gap: 1.25rem;
+}
+
+.info-link {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.info-link:hover {
+    color: var(--primary-light);
+    text-decoration: underline;
+}
+
+.travel-route {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem;
+    background: var(--gray-50);
+    border-radius: var(--border-radius);
+    margin-bottom: 1.5rem;
+}
+
+.travel-point {
+    text-align: center;
+}
+
+.travel-label {
+    font-size: 0.75rem;
+    color: var(--gray-600);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 0 0.5rem 0;
+}
+
+.travel-airport {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin: 0 0 0.5rem 0;
+}
+
+.travel-date {
+    font-size: 0.875rem;
+    color: var(--gray-600);
+    margin: 0;
+}
+
+.travel-arrow {
+    width: 32px;
+    height: 32px;
+    color: var(--primary);
+}
+
+.travel-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding: 1.25rem;
+    background: var(--gray-50);
+    border-radius: var(--border-radius);
+    margin-bottom: 1.5rem;
+}
+
+.travel-detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.travel-detail-label {
+    font-size: 0.75rem;
+    color: var(--gray-600);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.travel-detail-value {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--gray-900);
+}
+
+.travel-notes {
+    padding: 1.25rem;
+    background: oklch(from var(--info) l c h / 0.1);
+    border-left: 4px solid var(--info);
+    border-radius: var(--border-radius);
+}
+
+.notes-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--gray-700);
+    margin: 0 0 0.75rem 0;
+}
+
+.notes-content {
+    font-size: 0.9375rem;
+    color: var(--gray-700);
+    margin: 0;
+    line-height: 1.6;
+}
+
+.detail-sidebar .card {
+    position: sticky;
+    top: calc(var(--topbar-height) + 1rem);
+}
+
+.actions-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+@media (max-width: 1024px) {
+    .detail-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .detail-sidebar .card {
+        position: relative;
+        top: auto;
+    }
+
+    .travel-route {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .travel-arrow {
+        transform: rotate(90deg);
+    }
+
+    .travel-details {
+        grid-template-columns: 1fr;
+    }
+}

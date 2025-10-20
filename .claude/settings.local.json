@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p /var/www/ferron/monAvion/src/controllers/compagnie)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

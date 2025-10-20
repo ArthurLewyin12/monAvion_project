@@ -1,0 +1,320 @@
+/* components/css/how-it-works-section.css */
+
+.how-it-works-section {
+    padding: var(--spacing-24) 0;
+    background: linear-gradient(
+        180deg,
+        var(--color-white) 0%,
+        var(--color-primary-50) 50%,
+        var(--color-white) 100%
+    );
+    position: relative;
+    overflow: hidden;
+}
+
+/* Fond décoratif */
+.how-it-works-section::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(
+        circle,
+        oklch(from var(--color-accent-300) l c h / 0.05),
+        transparent
+    );
+    border-radius: 50%;
+    filter: blur(100px);
+    pointer-events: none;
+}
+
+/* === EN-TÊTE === */
+.hiw-header {
+    text-align: center;
+    margin-bottom: var(--spacing-16);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hiw-subtitle {
+    display: inline-block;
+    padding: var(--spacing-2) var(--spacing-4);
+    background: var(--color-accent-100);
+    color: var(--color-accent-700);
+    font-size: var(--font-size-sm);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-radius: var(--radius-full);
+    margin-bottom: var(--spacing-4);
+}
+
+.hiw-title {
+    font-size: var(--font-size-5xl);
+    font-weight: 800;
+    color: var(--color-gray-900);
+    line-height: 1.2;
+    margin-bottom: var(--spacing-6);
+}
+
+.hiw-description {
+    font-size: var(--font-size-xl);
+    color: var(--color-gray-600);
+    line-height: 1.6;
+}
+
+/* === FLUX DE TRAVAIL === */
+.hiw-flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-6);
+    margin-bottom: var(--spacing-16);
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+}
+
+/* Étape */
+.hiw-step {
+    position: relative;
+    background: var(--color-white);
+    padding: var(--spacing-8);
+    border-radius: var(--radius-2xl);
+    border: 2px solid var(--color-gray-200);
+    box-shadow: var(--shadow-lg);
+    max-width: 220px;
+    text-align: center;
+    transition: all var(--transition-base);
+}
+
+.hiw-step:hover {
+    transform: translateY(-8px) scale(1.03);
+    border-color: var(--color-primary-300);
+    box-shadow: var(--shadow-2xl), 0 0 40px oklch(from var(--color-primary-400) l c h / 0.2);
+}
+
+.hiw-step-highlight {
+    border-color: var(--color-secondary-400);
+    background: linear-gradient(
+        135deg,
+        var(--color-white) 0%,
+        var(--color-secondary-50) 100%
+    );
+    box-shadow:
+        var(--shadow-xl),
+        0 0 40px oklch(from var(--color-secondary-400) l c h / 0.2);
+}
+
+.hiw-step-highlight:hover {
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: var(--shadow-2xl), 0 0 60px oklch(from var(--color-secondary-400) l c h / 0.3);
+}
+
+/* Numéro d'étape */
+.hiw-step-number {
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--color-primary-500), var(--color-primary-600));
+    color: var(--color-white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: var(--font-size-sm);
+    box-shadow: var(--shadow-lg);
+    border: 3px solid var(--color-white);
+}
+
+/* Icône d'étape */
+.hiw-step-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto var(--spacing-4);
+    border-radius: var(--radius-2xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.hiw-step-icon svg {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    z-index: 2;
+}
+
+.hiw-icon-primary {
+    background: linear-gradient(135deg, var(--color-primary-100), var(--color-primary-200));
+    color: var(--color-primary-600);
+}
+
+.hiw-icon-secondary {
+    background: linear-gradient(135deg, var(--color-secondary-100), var(--color-secondary-200));
+    color: var(--color-secondary-600);
+}
+
+.hiw-icon-accent {
+    background: linear-gradient(135deg, var(--color-accent-100), var(--color-accent-200));
+    color: var(--color-accent-600);
+}
+
+.hiw-icon-success {
+    background: linear-gradient(135deg, oklch(0.92 0.05 145), oklch(0.85 0.10 145));
+    color: oklch(0.40 0.20 145);
+}
+
+/* Titre d'étape */
+.hiw-step-title {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-3);
+    line-height: 1.3;
+}
+
+/* Description */
+.hiw-step-description {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-600);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-4);
+}
+
+/* Badge */
+.hiw-step-badge {
+    display: inline-block;
+    padding: var(--spacing-1) var(--spacing-3);
+    background: var(--color-gray-100);
+    color: var(--color-gray-700);
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: var(--radius-full);
+}
+
+.hiw-badge-highlight {
+    background: var(--color-secondary-100);
+    color: var(--color-secondary-700);
+}
+
+/* Flèche de connexion */
+.hiw-arrow {
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hiw-arrow svg {
+    width: 100%;
+    height: 100%;
+    animation: arrowPulse 2s ease-in-out infinite;
+}
+
+@keyframes arrowPulse {
+    0%, 100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    50% {
+        opacity: 0.6;
+        transform: translateX(5px);
+    }
+}
+
+/* === STATISTIQUES === */
+.hiw-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-6);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.hiw-stat-card {
+    background: var(--color-white);
+    padding: var(--spacing-6);
+    border-radius: var(--radius-xl);
+    border: 2px solid var(--color-gray-200);
+    text-align: center;
+    transition: all var(--transition-base);
+}
+
+.hiw-stat-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-accent-300);
+    box-shadow: var(--shadow-lg);
+}
+
+.hiw-stat-icon {
+    font-size: var(--font-size-4xl);
+    margin-bottom: var(--spacing-2);
+}
+
+.hiw-stat-number {
+    font-size: var(--font-size-3xl);
+    font-weight: 800;
+    color: var(--color-primary-600);
+    margin-bottom: var(--spacing-1);
+}
+
+.hiw-stat-label {
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-600);
+    font-weight: 500;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 1200px) {
+    .hiw-arrow {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .how-it-works-section {
+        padding: var(--spacing-16) 0;
+    }
+
+    .hiw-title {
+        font-size: var(--font-size-4xl);
+    }
+
+    .hiw-description {
+        font-size: var(--font-size-base);
+    }
+
+    .hiw-flow {
+        flex-direction: column;
+        gap: var(--spacing-8);
+    }
+
+    .hiw-step {
+        max-width: 100%;
+    }
+
+    .hiw-arrow {
+        transform: rotate(90deg);
+        width: 50px;
+        height: 50px;
+    }
+
+    .hiw-stats {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-4);
+    }
+}

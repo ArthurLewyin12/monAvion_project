@@ -1,0 +1,343 @@
+/* components/css/features-section.css */
+
+.features-section {
+    padding: var(--spacing-24) 0;
+    background: linear-gradient(
+        180deg,
+        var(--color-gray-50) 0%,
+        var(--color-white) 50%,
+        var(--color-gray-50) 100%
+    );
+    position: relative;
+    overflow: hidden;
+}
+
+/* Effet de fond décoratif */
+.features-section::before {
+    content: '';
+    position: absolute;
+    top: 10%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(
+        circle,
+        oklch(from var(--color-primary-300) l c h / 0.08),
+        transparent
+    );
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+}
+
+.features-section::after {
+    content: '';
+    position: absolute;
+    bottom: 10%;
+    left: -10%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(
+        circle,
+        oklch(from var(--color-accent-300) l c h / 0.08),
+        transparent
+    );
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+}
+
+/* === EN-TÊTE DE SECTION === */
+.features-header {
+    text-align: center;
+    margin-bottom: var(--spacing-16);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.features-subtitle {
+    display: inline-block;
+    padding: var(--spacing-2) var(--spacing-4);
+    background: var(--color-primary-100);
+    color: var(--color-primary-700);
+    font-size: var(--font-size-sm);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-radius: var(--radius-full);
+    margin-bottom: var(--spacing-4);
+}
+
+.features-title {
+    font-size: var(--font-size-5xl);
+    font-weight: 800;
+    color: var(--color-gray-900);
+    line-height: 1.2;
+    margin-bottom: var(--spacing-6);
+}
+
+.text-gradient {
+    background: linear-gradient(
+        135deg,
+        var(--color-primary-500),
+        var(--color-accent-500)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.features-description {
+    font-size: var(--font-size-xl);
+    color: var(--color-gray-600);
+    line-height: 1.6;
+}
+
+/* === GRILLE DE FONCTIONNALITÉS === */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--spacing-8);
+    position: relative;
+    z-index: 1;
+}
+
+/* === CARTE DE FONCTIONNALITÉ === */
+.feature-card {
+    position: relative;
+    background: var(--color-white);
+    padding: var(--spacing-8);
+    border-radius: var(--radius-2xl);
+    border: 2px solid var(--color-gray-200);
+    transition: all var(--transition-base);
+    overflow: hidden;
+}
+
+/* Effet de brillance au survol */
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        oklch(from var(--color-white) l c h / 0.5),
+        transparent
+    );
+    transition: left 0.6s ease;
+}
+
+.feature-card-hover:hover::before {
+    left: 100%;
+}
+
+.feature-card-hover:hover {
+    transform: translateY(-8px);
+    border-color: var(--color-primary-300);
+    box-shadow:
+        var(--shadow-2xl),
+        0 0 40px oklch(from var(--color-primary-400) l c h / 0.15);
+}
+
+/* Icône de fonctionnalité */
+.feature-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: var(--radius-2xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--spacing-6);
+    position: relative;
+    transition: all var(--transition-base);
+}
+
+.feature-icon svg {
+    width: 32px;
+    height: 32px;
+    position: relative;
+    z-index: 2;
+}
+
+/* Effet de halo derrière l'icône */
+.feature-icon::before {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border-radius: var(--radius-2xl);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+    filter: blur(20px);
+}
+
+.feature-card-hover:hover .feature-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.feature-card-hover:hover .feature-icon::before {
+    opacity: 0.4;
+}
+
+/* Variantes de couleurs pour les icônes */
+.feature-icon-primary {
+    background: linear-gradient(135deg, var(--color-primary-100), var(--color-primary-200));
+    color: var(--color-primary-600);
+}
+
+.feature-icon-primary::before {
+    background: var(--color-primary-400);
+}
+
+.feature-icon-secondary {
+    background: linear-gradient(135deg, var(--color-secondary-100), var(--color-secondary-200));
+    color: var(--color-secondary-600);
+}
+
+.feature-icon-secondary::before {
+    background: var(--color-secondary-400);
+}
+
+.feature-icon-accent {
+    background: linear-gradient(135deg, var(--color-accent-100), var(--color-accent-200));
+    color: var(--color-accent-600);
+}
+
+.feature-icon-accent::before {
+    background: var(--color-accent-400);
+}
+
+.feature-icon-success {
+    background: linear-gradient(135deg, oklch(0.92 0.05 145), oklch(0.85 0.10 145));
+    color: oklch(0.40 0.20 145);
+}
+
+.feature-icon-success::before {
+    background: var(--color-success);
+}
+
+.feature-icon-warning {
+    background: linear-gradient(135deg, oklch(0.95 0.05 75), oklch(0.90 0.10 75));
+    color: oklch(0.50 0.20 75);
+}
+
+.feature-icon-warning::before {
+    background: var(--color-warning);
+}
+
+.feature-icon-info {
+    background: linear-gradient(135deg, oklch(0.92 0.05 250), oklch(0.85 0.10 250));
+    color: oklch(0.42 0.18 250);
+}
+
+.feature-icon-info::before {
+    background: var(--color-info);
+}
+
+/* Titre de fonctionnalité */
+.feature-title {
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-3);
+    line-height: 1.3;
+}
+
+/* Description */
+.feature-description {
+    font-size: var(--font-size-base);
+    color: var(--color-gray-600);
+    line-height: 1.7;
+    margin-bottom: var(--spacing-4);
+}
+
+.feature-description strong {
+    color: var(--color-primary-600);
+    font-weight: 700;
+}
+
+/* Badge */
+.feature-badge {
+    display: inline-block;
+    padding: var(--spacing-1) var(--spacing-3);
+    background: var(--color-primary-50);
+    color: var(--color-primary-700);
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--color-primary-200);
+}
+
+/* === ANIMATIONS === */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.feature-card {
+    animation: fadeInUp 0.6s ease-out;
+    animation-fill-mode: both;
+}
+
+.feature-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.feature-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.feature-card:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.feature-card:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.feature-card:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+.feature-card:nth-child(6) {
+    animation-delay: 0.6s;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+    .features-section {
+        padding: var(--spacing-16) 0;
+    }
+
+    .features-title {
+        font-size: var(--font-size-4xl);
+    }
+
+    .features-description {
+        font-size: var(--font-size-base);
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-6);
+    }
+
+    .feature-card {
+        padding: var(--spacing-6);
+    }
+
+    .feature-title {
+        font-size: var(--font-size-xl);
+    }
+}

@@ -1,0 +1,110 @@
+/* Styles pour reservation.php */
+
+.reservation-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.vol-summary {
+    background: linear-gradient(135deg, oklch(0.35 0.15 250) 0%, oklch(0.65 0.15 195) 100%);
+    color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+}
+
+.vol-summary-route {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.vol-summary-details {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    opacity: 0.95;
+}
+
+.sieges-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.siege-btn {
+    aspect-ratio: 1;
+    border: 2px solid oklch(0.90 0.02 250);
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    color: oklch(0.35 0.15 250);
+}
+
+.siege-btn:hover {
+    border-color: oklch(0.35 0.15 250);
+    transform: scale(1.1);
+}
+
+.siege-btn.selected {
+    background: oklch(0.35 0.15 250);
+    color: white;
+    border-color: oklch(0.35 0.15 250);
+}
+
+.prix-total {
+    background: oklch(0.98 0.02 250);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-top: 2rem;
+}
+
+.prix-ligne {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid oklch(0.90 0.02 250);
+}
+
+.prix-ligne:last-child {
+    border-bottom: none;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: oklch(0.35 0.15 250);
+    padding-top: 1rem;
+}
+
+.payment-methods {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.payment-method {
+    border: 2px solid oklch(0.90 0.02 250);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.payment-method input[type="radio"] {
+    display: none;
+}
+
+.payment-method:has(input:checked) {
+    background: oklch(0.35 0.15 250);
+    color: white;
+    border-color: oklch(0.35 0.15 250);
+}
+
+@media (max-width: 768px) {
+    .sieges-grid {
+        grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+    }
+}

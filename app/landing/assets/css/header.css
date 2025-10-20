@@ -1,0 +1,192 @@
+/* layouts/css/header.css */
+.main-header {
+    /* Style pour l'effet flottant */
+    margin: auto;
+    margin-bottom: 28px;
+    width: calc(100% - (2 * var(--spacing-6))); /* Largeur réduite */
+    border-radius: var(--radius-full); /* Plus arrondi */
+    max-width: 1200px;
+    /* Couleurs et fond plus vifs */
+    background: linear-gradient(
+        110deg,
+        var(--color-primary-600),
+        var(--color-primary-500)
+    );
+    color: var(--color-white);
+    display: flex;
+    justify-content: center;
+
+    /* Positionnement sticky avec un décalage */
+    position: sticky;
+    top: var(--spacing-4); /* Colle à 1rem du haut */
+    z-index: var(--z-20);
+
+    /* Apparence générale */
+    padding: var(--spacing-3) 0; /* Hauteur réduite */
+    box-shadow: var(--shadow-2xl); /* Ombre plus prononcée */
+    border: 1px solid oklch(var(--color-primary-400) / 0.5);
+
+    /* Transitions pour l'animation */
+    transition:
+        padding 0.3s ease-in-out,
+        background 0.3s ease-in-out;
+}
+
+/* Style du header une fois que la page est scrollée */
+.main-header.is-scrolled {
+    padding: var(--spacing-2) 0; /* Réduit la hauteur */
+    background: var(--color-primary-700); /* Fond bleu solide et opaque */
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-6);
+}
+
+.logo a {
+    color: var(--color-white);
+    text-decoration: none;
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    text-shadow: 1px 1px 3px oklch(0 0 0 / 0.2);
+}
+
+.main-nav .nav-list {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: var(--spacing-8);
+}
+
+.main-nav .nav-link {
+    color: var(--color-primary-100);
+    text-decoration: none;
+    font-weight: var(--font-weight-medium);
+    transition: all var(--transition-fast);
+    padding-bottom: var(--spacing-1);
+    border-bottom: 2px solid transparent;
+}
+
+.main-nav .nav-link:hover,
+.main-nav .nav-link.active {
+    color: var(--color-white);
+    border-bottom-color: var(--color-secondary-400);
+}
+
+/* Style du bouton Connexion principal (Desktop) */
+.nav-button {
+    display: inline-block;
+    padding: var(--spacing-2-5) var(--spacing-5);
+    background-color: var(--color-secondary-400);
+    color: var(--color-white);
+    text-decoration: none;
+    border-radius: var(--radius-full);
+    font-weight: var(--font-weight-bold);
+    transition: all var(--transition-base);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--color-secondary-300);
+}
+
+.nav-button:hover {
+    background-color: var(--color-secondary-300);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: var(--shadow-lg);
+}
+
+/* --- Responsive Header --- */
+
+.menu-toggle-button {
+    display: none; /* Caché par défaut sur grand écran */
+    border: none;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .main-nav {
+        position: relative; /* Pour positionner le dropdown */
+    }
+
+    /* Bouton "Menu" qui apparait sur mobile */
+    .menu-toggle-button {
+        display: inline-block; /* Affiché sur petit écran */
+        padding: var(--spacing-2) var(--spacing-4);
+        background-color: var(--color-secondary);
+        color: var(--color-white);
+        border-radius: var(--radius-full);
+        font-weight: var(--font-weight-medium);
+    }
+
+    .nav-list {
+        display: none; /* Caché par défaut sur mobile */
+        position: absolute;
+        top: calc(100% + var(--spacing-3));
+        right: 0;
+        width: 280px;
+
+        background: oklch(from var(--color-primary-700) l h c / 0.85);
+        backdrop-filter: blur(12px);
+        border: 1px solid oklch(var(--color-primary-400) / 0.6);
+        border-radius: var(--radius-lg);
+        padding: var(--spacing-2); /* Padding réduit */
+        box-shadow: var(--shadow-2xl);
+
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--spacing-1); /* Ecart réduit */
+
+        opacity: 0;
+        transform: translateY(-10px) scale(0.95);
+        transform-origin: top right;
+        transition:
+            opacity 0.2s ease-out,
+            transform 0.2s ease-out;
+        pointer-events: none;
+    }
+
+    .nav-list.is-open {
+        display: flex;
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        pointer-events: auto;
+    }
+
+    .nav-list .nav-item {
+        width: 100%;
+    }
+
+    .nav-list .nav-link,
+    .nav-list .nav-button {
+        display: block;
+        width: 100%;
+        text-align: left;
+        padding: var(--spacing-2-5) var(--spacing-3);
+        border-radius: var(--radius-md);
+        transition: background-color 0.2s ease-out;
+    }
+
+    .nav-list .nav-link:hover {
+        background-color: oklch(var(--color-white) / 0.1);
+        border-bottom-color: transparent; /* Override le style desktop */
+    }
+
+    /* Style spécifique pour le bouton Connexion DANS le dropdown */
+    .nav-list .nav-button {
+        background: transparent;
+        font-weight: var(--font-weight-bold);
+        color: var(--color-accent-300);
+        border: none;
+        box-shadow: none;
+    }
+
+    .nav-list .nav-button:hover {
+        background-color: oklch(var(--color-accent-300) / 0.15);
+        transform: none;
+    }
+}

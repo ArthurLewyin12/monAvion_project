@@ -1,0 +1,122 @@
+/**
+ * Styles pour la page Supervision des réservations
+ */
+
+/* Réutiliser les styles de vols.css */
+@import url('vols.css');
+
+/* Référence de réservation */
+.reservation-ref {
+    font-family: 'Courier New', monospace;
+    font-size: 1rem;
+    color: var(--primary);
+}
+
+/* Vol info */
+.vol-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.vol-info strong {
+    color: var(--gray-900);
+    font-family: 'Courier New', monospace;
+}
+
+.vol-info small {
+    color: var(--gray-600);
+    font-size: 0.8125rem;
+}
+
+/* Client info */
+.client-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.client-info strong {
+    color: var(--gray-900);
+}
+
+.client-info small {
+    color: var(--gray-600);
+    font-size: 0.8125rem;
+}
+
+/* Prix */
+.prix {
+    color: var(--primary);
+    font-size: 1.125rem;
+}
+
+/* Badges de classe */
+.badge-classe-economique {
+    background: oklch(from var(--info) l c h / 0.1);
+    color: var(--info);
+}
+
+.badge-classe-affaires {
+    background: oklch(from var(--warning) l c h / 0.1);
+    color: var(--warning);
+}
+
+.badge-classe-premiere {
+    background: oklch(from var(--primary) l c h / 0.1);
+    color: var(--primary);
+}
+
+/* Badges de statut réservation */
+.badge-confirmee {
+    background: oklch(from var(--success) l c h / 0.1);
+    color: var(--success);
+}
+
+.badge-en_attente {
+    background: oklch(from var(--warning) l c h / 0.1);
+    color: var(--warning);
+}
+
+.badge-annulee {
+    background: oklch(from var(--error) l c h / 0.1);
+    color: var(--error);
+}
+
+/* Détails de réservation dans la modale */
+.reservation-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Passagers */
+.passagers-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.passager-card {
+    padding: 1rem;
+    background: var(--gray-50);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--border-radius);
+}
+
+.passager-card strong {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.passager-card p {
+    margin: 0.25rem 0;
+    font-size: 0.9375rem;
+    color: var(--gray-900);
+}
+
+.passager-card p:first-of-type {
+    font-weight: 600;
+}

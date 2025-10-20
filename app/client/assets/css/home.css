@@ -1,0 +1,91 @@
+/* Styles pour la page d'accueil client */
+
+.dashboard-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background: linear-gradient(135deg, oklch(0.35 0.15 250) 0%, oklch(0.45 0.15 250) 100%);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card.secondary {
+    background: linear-gradient(135deg, oklch(0.70 0.22 45) 0%, oklch(0.75 0.22 45) 100%);
+}
+
+.stat-card.accent {
+    background: linear-gradient(135deg, oklch(0.65 0.15 195) 0%, oklch(0.70 0.15 195) 100%);
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.stat-label {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+.reservation-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: oklch(0.98 0.02 250);
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.reservation-route {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: oklch(0.30 0.15 250);
+    margin-bottom: 0.25rem;
+}
+
+.reservation-details {
+    font-size: 0.9rem;
+    color: oklch(0.50 0.05 250);
+}
+
+.quick-actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.action-card {
+    background: white;
+    border: 2px solid oklch(0.90 0.02 250);
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.action-card:hover {
+    border-color: oklch(0.35 0.15 250);
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.action-title {
+    font-weight: 600;
+    color: oklch(0.35 0.15 250);
+    margin-bottom: 0.25rem;
+}
+
+.action-description {
+    font-size: 0.9rem;
+    color: oklch(0.50 0.05 250);
+}

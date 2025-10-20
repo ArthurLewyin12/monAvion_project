@@ -1,0 +1,152 @@
+/**
+ * CSS spécifique pour la page Demandes clients
+ */
+
+/* ========================================
+   DEMANDES GRID
+   ======================================== */
+.demandes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 1.5rem;
+}
+
+.demande-card {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+.demande-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-4px);
+}
+
+.demande-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    background: var(--gray-50);
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.demande-date {
+    font-size: 0.8125rem;
+    color: var(--gray-600);
+    font-weight: 500;
+}
+
+.demande-body {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.demande-client {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.client-icon {
+    width: 40px;
+    height: 40px;
+    padding: 0.5rem;
+    background: oklch(from var(--primary) l c h / 0.15);
+    color: var(--primary);
+    border-radius: var(--border-radius);
+    flex-shrink: 0;
+}
+
+.client-name {
+    font-weight: 700;
+    color: var(--gray-900);
+    margin: 0 0 0.25rem 0;
+}
+
+.client-contact {
+    font-size: 0.875rem;
+    color: var(--gray-600);
+    margin: 0;
+}
+
+.demande-route {
+    padding: 1rem;
+    background: var(--gray-50);
+    border-radius: var(--border-radius);
+}
+
+.route-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.route-airport {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--gray-900);
+}
+
+.route-arrow {
+    width: 20px;
+    height: 20px;
+    color: var(--primary);
+}
+
+.route-date {
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--gray-600);
+    margin: 0;
+}
+
+.demande-details {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--gray-700);
+    font-weight: 500;
+}
+
+.detail-icon {
+    width: 18px;
+    height: 18px;
+    color: var(--gray-400);
+}
+
+.demande-footer {
+    padding: 1.25rem;
+    border-top: 1px solid var(--gray-200);
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+@media (max-width: 768px) {
+    .demandes-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .route-airport {
+        font-size: 1.125rem;
+    }
+
+    .demande-details {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+}

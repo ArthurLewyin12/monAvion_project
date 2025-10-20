@@ -1,0 +1,104 @@
+/* Styles pour mes-reservations.php */
+
+.filters {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.filters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    align-items: end;
+}
+
+.stats-summary {
+    background: linear-gradient(135deg, oklch(0.35 0.15 250) 0%, oklch(0.65 0.15 195) 100%);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.stat-item {
+    flex: 1;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.stat-text {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.reservation-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.reservation-card {
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1.5rem;
+}
+
+.flight-info {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 1rem;
+    align-items: center;
+    padding: 1rem;
+    background: oklch(0.98 0.02 250);
+    border-radius: 8px;
+}
+
+.airport-code {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: oklch(0.35 0.15 250);
+}
+
+.airport-time {
+    font-size: 0.9rem;
+    color: oklch(0.50 0.05 250);
+    margin-top: 0.25rem;
+}
+
+.flight-arrow {
+    font-size: 1.5rem;
+    color: oklch(0.65 0.15 195);
+}
+
+.flight-details {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    font-size: 0.9rem;
+    color: oklch(0.50 0.05 250);
+}
+
+@media (max-width: 768px) {
+    .reservation-card {
+        grid-template-columns: 1fr;
+    }
+
+    .stats-summary {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}

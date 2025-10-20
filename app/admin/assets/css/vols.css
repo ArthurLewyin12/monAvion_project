@@ -1,0 +1,138 @@
+/**
+ * Styles pour la page Supervision des vols
+ */
+
+/* Réutiliser les styles de utilisateurs.css */
+@import url('utilisateurs.css');
+
+/* Grille de stats 4 colonnes */
+.stats-grid-4 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Vol info dans le tableau */
+.vol-numero {
+    font-family: 'Courier New', monospace;
+    font-size: 1rem;
+    color: var(--primary);
+}
+
+.vol-route {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.route-code {
+    font-weight: 600;
+    font-family: 'Courier New', monospace;
+    color: var(--gray-900);
+}
+
+.route-arrow {
+    width: 20px;
+    height: 20px;
+    color: var(--gray-400);
+}
+
+.avion-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.avion-info strong {
+    color: var(--gray-900);
+    font-size: 0.9375rem;
+}
+
+.avion-info small {
+    color: var(--gray-600);
+    font-size: 0.8125rem;
+    font-family: 'Courier New', monospace;
+}
+
+.vol-datetime {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.vol-datetime strong {
+    color: var(--gray-900);
+}
+
+.vol-datetime small {
+    color: var(--gray-600);
+    font-size: 0.8125rem;
+}
+
+.reservations-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.reservations-info strong {
+    color: var(--gray-900);
+    font-size: 1.125rem;
+}
+
+.reservations-info small {
+    color: var(--gray-600);
+    font-size: 0.8125rem;
+}
+
+/* Badges de statut vol */
+.badge-programme {
+    background: oklch(from var(--success) l c h / 0.1);
+    color: var(--success);
+}
+
+.badge-retarde {
+    background: oklch(from var(--warning) l c h / 0.1);
+    color: var(--warning);
+}
+
+.badge-annule {
+    background: oklch(from var(--error) l c h / 0.1);
+    color: var(--error);
+}
+
+/* Détails du vol dans la modale */
+.vol-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.detail-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.detail-section-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin: 0;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--gray-200);
+}
+
+.detail-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .stats-grid-4 {
+        grid-template-columns: 1fr;
+    }
+}

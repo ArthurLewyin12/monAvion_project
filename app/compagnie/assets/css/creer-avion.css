@@ -1,0 +1,251 @@
+/**
+ * CSS pour creer-avion.php
+ */
+
+.form-layout {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.form-main {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.avion-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--gray-700);
+}
+
+.form-input,
+.form-textarea {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--gray-300);
+    border-radius: var(--border-radius);
+    font-size: 0.9375rem;
+    color: var(--gray-900);
+    background: var(--white);
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px oklch(from var(--primary) l c h / 0.1);
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.form-hint {
+    font-size: 0.8125rem;
+    color: var(--gray-500);
+    margin: 0;
+}
+
+/* Configuration des sièges */
+.seats-config-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.seat-class-card {
+    border: 2px solid var(--gray-200);
+    border-radius: var(--border-radius);
+    padding: 1.25rem;
+    background: var(--white);
+    transition: all 0.2s ease;
+}
+
+.seat-class-card:hover {
+    border-color: var(--primary);
+    box-shadow: 0 4px 12px oklch(from var(--gray-900) l c h / 0.08);
+}
+
+.seat-class-card:has(.seat-input:focus) {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px oklch(from var(--primary) l c h / 0.1);
+}
+
+.seat-class-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.seat-class-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--border-radius);
+    flex-shrink: 0;
+}
+
+.seat-class-icon svg {
+    width: 20px;
+    height: 20px;
+    color: var(--white);
+}
+
+.seat-class-title {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--gray-900);
+    margin: 0;
+}
+
+.seat-class-desc {
+    font-size: 0.8125rem;
+    color: var(--gray-500);
+    margin: 0;
+}
+
+.seat-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--gray-300);
+    border-radius: var(--border-radius);
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--gray-900);
+    text-align: center;
+    background: var(--gray-50);
+    transition: all 0.2s ease;
+}
+
+.seat-input:focus {
+    outline: none;
+    background: var(--white);
+    border-color: var(--primary);
+}
+
+/* Résumé des sièges */
+.seats-summary {
+    padding: 1.25rem;
+    background: var(--gray-50);
+    border-radius: var(--border-radius);
+    border: 2px dashed var(--gray-300);
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.summary-label {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--gray-700);
+}
+
+.summary-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+/* Actions */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding-top: 1rem;
+}
+
+/* Sidebar aide */
+.form-sidebar .card {
+    position: sticky;
+    top: calc(var(--topbar-height) + 1rem);
+}
+
+.help-section {
+    margin-bottom: 1.5rem;
+}
+
+.help-section:last-child {
+    margin-bottom: 0;
+}
+
+.help-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--gray-900);
+    margin: 0 0 0.75rem 0;
+}
+
+.help-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.help-list li {
+    font-size: 0.8125rem;
+    color: var(--gray-600);
+    line-height: 1.5;
+    padding-left: 1.25rem;
+    position: relative;
+}
+
+.help-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--primary);
+    font-weight: 700;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .form-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .form-sidebar .card {
+        position: relative;
+        top: auto;
+    }
+
+    .seats-config-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .form-actions {
+        flex-direction: column-reverse;
+    }
+
+    .form-actions .btn {
+        width: 100%;
+    }
+}

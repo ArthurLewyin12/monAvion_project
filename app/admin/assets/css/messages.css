@@ -1,0 +1,139 @@
+/**
+ * Styles pour la page Messages de contact
+ */
+
+/* Réutiliser les styles de demandes.css */
+@import url('demandes.css');
+
+/* Liste des messages */
+.messages-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.message-card {
+    border: 1px solid var(--gray-200);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    transition: all 0.2s ease;
+}
+
+.message-card:hover {
+    box-shadow: 0 4px 12px oklch(from var(--gray-900) l c h / 0.08);
+}
+
+.message-card.message-unread {
+    border-left: 4px solid var(--primary);
+    background: oklch(from var(--primary) l c h / 0.02);
+}
+
+.message-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: var(--gray-50);
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.message-unread .message-header {
+    background: oklch(from var(--primary) l c h / 0.05);
+}
+
+.message-info {
+    flex: 1;
+}
+
+.message-nom {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin: 0 0 0.5rem 0;
+}
+
+.message-meta {
+    font-size: 0.875rem;
+    color: var(--gray-600);
+    margin: 0;
+}
+
+.status-non_traite {
+    background: oklch(from var(--error) l c h / 0.1);
+    color: var(--error);
+}
+
+.status-traite {
+    background: oklch(from var(--success) l c h / 0.1);
+    color: var(--success);
+}
+
+.message-body {
+    padding: 1.5rem;
+}
+
+.message-sujet {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.message-sujet strong {
+    color: var(--gray-900);
+    font-weight: 600;
+}
+
+.message-content {
+    padding: 1rem;
+    background: var(--gray-50);
+    border-radius: var(--border-radius);
+    color: var(--gray-700);
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.message-traitement {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding: 0.75rem 1rem;
+    background: oklch(from var(--success) l c h / 0.1);
+    border-radius: var(--border-radius);
+    color: var(--success);
+    font-size: 0.875rem;
+}
+
+.message-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+.message-actions {
+    display: flex;
+    gap: 0.75rem;
+    padding: 1.5rem;
+    border-top: 1px solid var(--gray-200);
+    background: var(--gray-50);
+    flex-wrap: wrap;
+}
+
+.message-actions .btn {
+    flex: 1;
+    min-width: 180px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .message-actions {
+        flex-direction: column;
+    }
+
+    .message-actions .btn {
+        width: 100%;
+        min-width: unset;
+    }
+}

@@ -1,0 +1,97 @@
+/* layouts/css/footer.css */
+.main-footer {
+    background: var(--color-primary-800);
+    color: var(--color-gray-300);
+    padding: var(--spacing-12) var(--spacing-6) var(--spacing-6) var(--spacing-6);
+    margin-top: var(--spacing-20);
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    position: relative;
+    text-align: center;
+    box-shadow: 0 -10px 30px -10px oklch(0 0 0 / 0.2);
+}
+
+.footer-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.footer-title {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-white);
+    margin-bottom: var(--spacing-6);
+}
+
+.footer-nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-6);
+    margin-bottom: var(--spacing-8);
+}
+
+.footer-nav a {
+    color: var(--color-gray-300);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+    font-size: var(--font-size-base);
+}
+
+.footer-nav a:hover {
+    color: var(--color-white);
+    text-decoration: underline;
+}
+
+.footer-separator {
+    width: 100px;
+    height: 1px;
+    background-color: var(--color-primary-700);
+    margin: 0 auto var(--spacing-8) auto;
+}
+
+.footer-legal {
+    font-size: var(--font-size-sm);
+}
+
+.footer-legal a {
+     color: var(--color-gray-400);
+     text-decoration: none;
+     transition: color var(--transition-fast);
+}
+
+.footer-legal a:hover {
+    color: var(--color-white);
+}
+
+.footer-legal .separator {
+    margin: 0 var(--spacing-2);
+    color: var(--color-gray-600);
+}
+
+.footer-copyright {
+    margin-top: var(--spacing-6);
+    font-size: var(--font-size-sm);
+    color: var(--color-gray-500);
+}
+
+/* --- Responsive Footer --- */
+
+@media (max-width: 768px) {
+    .main-footer {
+        border-top-left-radius: 30px;
+        border-top-right-radius: 30px;
+        padding: var(--spacing-8) var(--spacing-4) var(--spacing-4) var(--spacing-4);
+        margin-top: var(--spacing-12);
+    }
+
+    .footer-nav {
+        flex-direction: column; /* Empile les liens verticalement */
+        gap: var(--spacing-4);
+        margin-bottom: var(--spacing-6);
+    }
+
+    .footer-title {
+        font-size: var(--font-size-2xl);
+    }
+}
