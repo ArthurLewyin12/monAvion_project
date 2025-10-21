@@ -50,7 +50,7 @@ if ($result['success']) {
     // Rediriger selon le type d'utilisateur
     switch ($user['type_utilisateur']) {
         case 'ADMIN':
-            header('Location: ../../app/admin/home.php');
+            header('Location: ../../app/admin/dashboard.php');
             break;
         case 'AGENCE':
             header('Location: ../../app/agency/home.php');

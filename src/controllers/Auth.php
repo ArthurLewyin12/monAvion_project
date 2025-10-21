@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Classe d'authentification et gestion des utilisateurs
  */
@@ -15,7 +16,8 @@
  * @param bool $newsletter S'abonner à la newsletter
  * @return array ['success' => bool, 'user_id' => int|null, 'errors' => array]
  */
-function create_user($pdo, $prenom, $nom, $email, $telephone, $password, $type_utilisateur = 'CLIENT', $newsletter = false) {
+function create_user($pdo, $prenom, $nom, $email, $telephone, $password, $type_utilisateur = 'CLIENT', $newsletter = false)
+{
     try {
         // Vérifier si l'email existe déjà
         $stmt = $pdo->prepare("SELECT id FROM utilisateurs WHERE email = :email");
@@ -35,11 +37,11 @@ function create_user($pdo, $prenom, $nom, $email, $telephone, $password, $type_u
         $stmt = $pdo->prepare("
             INSERT INTO utilisateurs (
                 prenom, nom, email, telephone, mot_de_passe,
-                type_utilisateur, newsletter, statut
+                type_utilisateur, abonnement_newsletter, statut_actuel
             )
             VALUES (
                 :prenom, :nom, :email, :telephone, :mot_de_passe,
-                :type_utilisateur, :newsletter, 'ACTIF'
+                :type_utilisateur, :abonnement_newsletter, 'ACTIF'
             )
         ");
 
@@ -50,7 +52,7 @@ function create_user($pdo, $prenom, $nom, $email, $telephone, $password, $type_u
             ':telephone' => $telephone ?: null,
             ':mot_de_passe' => $password_hash,
             ':type_utilisateur' => $type_utilisateur,
-            ':newsletter' => $newsletter ? 1 : 0
+            ':abonnement_newsletter' => $newsletter ? 1 : 0
         ]);
 
         $user_id = $pdo->lastInsertId();
@@ -60,13 +62,13 @@ function create_user($pdo, $prenom, $nom, $email, $telephone, $password, $type_u
             'user_id' => $user_id,
             'errors' => []
         ];
-
     } catch (PDOException $e) {
         error_log("Erreur création utilisateur: " . $e->getMessage());
+        print_r($e->getMessage());
         return [
             'success' => false,
             'user_id' => null,
-            'errors' => ['db' => 'Une erreur est survenue lors de la création du compte.']
+            'errors' => ['db' => 'Une erreur est survenue lors de la création du compte']
         ];
     }
 }
@@ -78,7 +80,8 @@ function create_user($pdo, $prenom, $nom, $email, $telephone, $password, $type_u
  * @param string $password Mot de passe
  * @return array ['success' => bool, 'user' => array|null, 'error' => string|null]
  */
-function login($pdo, $email, $password) {
+function login($pdo, $email, $password)
+{
     return authenticate_user($pdo, $email, $password);
 }
 
@@ -89,10 +92,11 @@ function login($pdo, $email, $password) {
  * @param string $password Mot de passe
  * @return array ['success' => bool, 'user' => array|null, 'error' => string|null]
  */
-function authenticate_user($pdo, $email, $password) {
+function authenticate_user($pdo, $email, $password)
+{
     try {
         $stmt = $pdo->prepare("
-            SELECT id, prenom, nom, email, mot_de_passe, type_utilisateur, statut
+            SELECT id, prenom, nom, email, mot_de_passe, type_utilisateur, statut_actuel, premiere_connexion
             FROM utilisateurs
             WHERE email = :email
         ");
@@ -108,11 +112,11 @@ function authenticate_user($pdo, $email, $password) {
         }
 
         // Vérifier le statut
-        if ($user['statut'] !== 'ACTIF') {
+        if ($user['statut_actuel'] !== 'ACTIF') {
             return [
                 'success' => false,
                 'user' => null,
-                'error' => 'Votre compte a été désactivé. Contactez l\'administrateur.'
+                'error' => "Votre compte a été désactivé. Contactez l'administrateur."
             ];
         }
 
@@ -133,7 +137,6 @@ function authenticate_user($pdo, $email, $password) {
             'user' => $user,
             'error' => null
         ];
-
     } catch (PDOException $e) {
         error_log("Erreur authentification: " . $e->getMessage());
         return [
@@ -149,17 +152,20 @@ function authenticate_user($pdo, $email, $password) {
  * @param PDO $pdo Instance PDO
  * @param int $user_id ID de l'utilisateur
  */
-function update_last_login($pdo, $user_id) {
-    try {
-        $stmt = $pdo->prepare("
-            UPDATE utilisateurs
-            SET derniere_connexion = CURRENT_TIMESTAMP
-            WHERE id = :user_id
-        ");
-        $stmt->execute([':user_id' => $user_id]);
-    } catch (PDOException $e) {
-        error_log("Erreur update last login: " . $e->getMessage());
-    }
+function update_last_login($pdo, $user_id)
+{
+    // try {
+    //     // La colonne `derniere_connexion` n'existe pas dans la table `utilisateurs`.
+    //     // Cette fonctionnalité est désactivée en attendant une migration de la base de données.
+    //     // $stmt = $pdo->prepare("
+    //     //     UPDATE utilisateurs
+    //     //     SET derniere_connexion = CURRENT_TIMESTAMP
+    //     //     WHERE id = :user_id
+    //     // ");
+    //     // $stmt->execute([':user_id' => $user_id]);
+    // } catch (PDOException $e) {
+    //     error_log("Erreur update last login: " . $e->getMessage());
+    // }
 }
 
 /**
@@ -168,10 +174,11 @@ function update_last_login($pdo, $user_id) {
  * @param int $user_id ID de l'utilisateur
  * @return array|null Les données de l'utilisateur ou null
  */
-function get_user_by_id($pdo, $user_id) {
+function get_user_by_id($pdo, $user_id)
+{
     try {
         $stmt = $pdo->prepare("
-            SELECT id, prenom, nom, email, telephone, type_utilisateur, statut, created_at
+            SELECT id, prenom, nom, email, telephone, type_utilisateur, statut_actuel, date_creation
             FROM utilisateurs
             WHERE id = :user_id
         ");
@@ -189,10 +196,11 @@ function get_user_by_id($pdo, $user_id) {
  * @param string $email Email de l'utilisateur
  * @return array|null Les données de l'utilisateur ou null
  */
-function get_user_by_email($pdo, $email) {
+function get_user_by_email($pdo, $email)
+{
     try {
         $stmt = $pdo->prepare("
-            SELECT id, prenom, nom, email, telephone, type_utilisateur, statut, created_at
+            SELECT id, prenom, nom, email, telephone, type_utilisateur, statut_actuel, date_creation
             FROM utilisateurs
             WHERE email = :email
         ");

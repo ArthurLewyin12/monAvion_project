@@ -2,7 +2,7 @@
 
 
 $host = 'localhost';
-$dbname = 'dbAvion2';
+$dbname = 'dbavion3';
 $username = 'root';
 $password = '';
 

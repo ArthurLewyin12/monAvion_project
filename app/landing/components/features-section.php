@@ -1,4 +1,5 @@
-<?php // components/features-section.php ?>
+<?php // components/features-section.php 
+?>
 <section class="features-section">
     <div class="container animate-on-scroll">
         <!-- En-tête de section -->
@@ -6,7 +7,7 @@
             <span class="features-subtitle">Fonctionnalités</span>
             <h2 class="features-title">Une plateforme conçue pour la <span class="text-gradient">performance</span></h2>
             <p class="features-description">
-                Découvrez comment FlyManager simplifie votre quotidien avec des outils puissants et intuitifs.
+                Découvrez comment MonVolEnLigne simplifie votre quotidien avec des outils puissants et intuitifs.
             </p>
         </div>
 
@@ -17,10 +18,10 @@
             <div class="feature-card feature-card-hover">
                 <div class="feature-icon feature-icon-primary">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="11" cy="11" r="8"/>
-                        <path d="m21 21-4.35-4.35"/>
-                        <circle cx="11" cy="11" r="4"/>
-                        <path d="M11 7v8M7 11h8"/>
+                        <circle cx="11" cy="11" r="8" />
+                        <path d="m21 21-4.35-4.35" />
+                        <circle cx="11" cy="11" r="4" />
+                        <path d="M11 7v8M7 11h8" />
                     </svg>
                 </div>
                 <h3 class="feature-title">Recherche Multi-Compagnies</h3>
@@ -34,11 +35,11 @@
             <div class="feature-card feature-card-hover">
                 <div class="feature-icon feature-icon-secondary">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="3" y="4" width="18" height="18" rx="2"/>
-                        <path d="M7 8h10M7 12h10M7 16h10"/>
-                        <circle cx="5" cy="8" r="0.5" fill="currentColor"/>
-                        <circle cx="5" cy="12" r="0.5" fill="currentColor"/>
-                        <circle cx="5" cy="16" r="0.5" fill="currentColor"/>
+                        <rect x="3" y="4" width="18" height="18" rx="2" />
+                        <path d="M7 8h10M7 12h10M7 16h10" />
+                        <circle cx="5" cy="8" r="0.5" fill="currentColor" />
+                        <circle cx="5" cy="12" r="0.5" fill="currentColor" />
+                        <circle cx="5" cy="16" r="0.5" fill="currentColor" />
                     </svg>
                 </div>
                 <h3 class="feature-title">Visualisation des Sièges</h3>
@@ -52,8 +53,8 @@
             <div class="feature-card feature-card-hover">
                 <div class="feature-icon feature-icon-accent">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
-                        <path d="M12 11v6M9 14h6"/>
+                        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+                        <path d="M12 11v6M9 14h6" />
                     </svg>
                 </div>
                 <h3 class="feature-title">Gestion de Dossiers</h3>
@@ -67,9 +68,9 @@
             <div class="feature-card feature-card-hover">
                 <div class="feature-icon feature-icon-success">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="10"/>
-                        <path d="M12 6v6l4 2"/>
-                        <path d="M16 8h2a2 2 0 0 1 2 2v4"/>
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M12 6v6l4 2" />
+                        <path d="M16 8h2a2 2 0 0 1 2 2v4" />
                     </svg>
                 </div>
                 <h3 class="feature-title">Tarification en Temps Réel</h3>
@@ -83,9 +84,9 @@
             <div class="feature-card feature-card-hover">
                 <div class="feature-icon feature-icon-warning">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="10"/>
-                        <line x1="2" y1="12" x2="22" y2="12"/>
-                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="2" y1="12" x2="22" y2="12" />
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
                     </svg>
                 </div>
                 <h3 class="feature-title">Interface Multilingue</h3>
@@ -99,9 +100,9 @@
             <div class="feature-card feature-card-hover">
                 <div class="feature-icon feature-icon-info">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M3 3v18h18"/>
-                        <path d="m19 9-5 5-4-4-3 3"/>
-                        <circle cx="19" cy="9" r="1" fill="currentColor"/>
+                        <path d="M3 3v18h18" />
+                        <path d="m19 9-5 5-4-4-3 3" />
+                        <circle cx="19" cy="9" r="1" fill="currentColor" />
                     </svg>
                 </div>
                 <h3 class="feature-title">Rapports & Statistiques</h3>

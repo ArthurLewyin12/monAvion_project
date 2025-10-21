@@ -88,7 +88,7 @@ function redirectToDashboard(): void
 
     switch ($type) {
         case "ADMIN":
-            header("Location: /monAvion/app/admin/home.php");
+            header("Location: /monAvion/app/admin/dashboard.php");
             break;
         case "AGENCE":
             header("Location: /monAvion/app/agency/home.php");

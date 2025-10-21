@@ -40,7 +40,7 @@
                 <h2 class="card-title">Informations personnelles</h2>
             </div>
             <div class="card-body">
-                <form method="POST" action="/src/controllers/profil_process.php">
+                <form method="POST" action="../../src/controllers/profil_process.php">
                     <input type="hidden" name="action" value="update_info">
                     <div class="grid grid-2">
                         <div class="form-group">
@@ -75,7 +75,7 @@
                 <h2 class="card-title">Modifier le mot de passe</h2>
             </div>
             <div class="card-body">
-                <form method="POST" action="/src/controllers/profil_process.php">
+                <form method="POST" action="../../src/controllers/profil_process.php">
                     <input type="hidden" name="action" value="update_password">
                     <div class="form-group">
                         <label class="form-label" for="current_password">Mot de passe actuel</label>
@@ -105,7 +105,7 @@
                 <h2 class="card-title">Préférences du compte</h2>
             </div>
             <div class="card-body">
-                <form method="POST" action="/src/controllers/profil_process.php">
+                <form method="POST" action="../../src/controllers/profil_process.php">
                     <input type="hidden" name="action" value="update_preferences">
 
                     <div class="info-item-display">
@@ -171,14 +171,14 @@
 </div>
 
 <script>
-function switchTab(tabName) {
-    document.querySelectorAll('.tab-content').forEach(content => {
-        content.classList.remove('active');
-    });
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.remove('active');
-    });
-    document.getElementById('tab-' + tabName).classList.add('active');
-    event.target.classList.add('active');
-}
+    function switchTab(tabName) {
+        document.querySelectorAll('.tab-content').forEach(content => {
+            content.classList.remove('active');
+        });
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        document.getElementById('tab-' + tabName).classList.add('active');
+        event.target.classList.add('active');
+    }
 </script>

@@ -5,7 +5,7 @@ if (
     !$_SESSION["logged_in"] ||
     $_SESSION["user_type"] !== "CLIENT"
 ) {
-    header("Location: /app/auth/connexion.php");
+    header("Location:../../auth/connexion.php");
     exit();
 }
 
@@ -16,59 +16,61 @@ $current_page = basename($_SERVER["PHP_SELF"], ".php");
 ?>
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlyManager - Espace Client</title>
-    <link rel="stylesheet" href="/public/main.css">
-    <link rel="stylesheet" href="/app/landing/assets/css/header.css">
-    <link rel="stylesheet" href="/app/landing/assets/css/footer.css">
-    <link rel="stylesheet" href="/public/assets/css/animations.css">
+    <title>MonVolEnLigne - Espace Client</title>
+    <link rel="stylesheet" href="../../public/main.css">
+    <link rel="stylesheet" href="../landing/assets/css/header.css">
+    <link rel="stylesheet" href="../landing/assets/css/footer.css">
+    <link rel="stylesheet" href="../../public/assets/css/animations.css">
     <link rel="stylesheet" href="assets/css/base.css">
 </head>
+
 <body class="bg-gray-50">
     <header class="main-header">
         <div class="header-container">
             <div class="logo">
-                <a href="/app/client/home.php">FlyManager</a>
+                <a href="/app/client/home.php">MonVolEnLigne</a>
             </div>
             <nav class="main-nav">
                 <button class="menu-toggle-button" aria-controls="main-navigation" aria-expanded="false">Menu</button>
                 <ul class="nav-list" id="main-navigation">
                     <li class="nav-item">
                         <a href="home.php" class="nav-link <?= $current_page ===
-                        "home"
-                            ? "active"
-                            : "" ?>">
+                                                                "home"
+                                                                ? "active"
+                                                                : "" ?>">
                             Accueil
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="recherche-vols.php" class="nav-link <?= $current_page ===
-                        "recherche-vols"
-                            ? "active"
-                            : "" ?>">
+                                                                            "recherche-vols"
+                                                                            ? "active"
+                                                                            : "" ?>">
                             Rechercher un vol
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="mes-reservations.php" class="nav-link <?= $current_page ===
-                        "mes-reservations"
-                            ? "active"
-                            : "" ?>">
+                                                                            "mes-reservations"
+                                                                            ? "active"
+                                                                            : "" ?>">
                             Mes réservations
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="profil.php" class="nav-link <?= $current_page ===
-                        "profil"
-                            ? "active"
-                            : "" ?>">
+                                                                    "profil"
+                                                                    ? "active"
+                                                                    : "" ?>">
                             Profil
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/src/controllers/logout.php" class="nav-button">
+                        <a href="../../src/controllers/logout.php" class="nav-button">
                             Déconnexion
                         </a>
                     </li>
