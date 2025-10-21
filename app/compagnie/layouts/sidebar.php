@@ -7,7 +7,7 @@
 ?>
 <aside class="sidebar">
     <div class="sidebar-header">
-        <a href="../../landing/index.php" class="sidebar-logo">
+        <a href="<?= url('app/landing/index.php') ?>" class="sidebar-logo">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 32px; height: 32px;">
                 <path d="M21 16V8C21 6.89543 20.1046 6 19 6H5C3.89543 6 3 6.89543 3 8V16C3 17.1046 3.89543 18 5 18H19C20.1046 18 21 17.1046 21 16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                 <path d="M12 11L3 6L12 2L21 6L12 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -62,7 +62,7 @@
     </nav>
 
     <div class="sidebar-footer">
-        <a href="/src/controllers/logout.php" class="sidebar-link sidebar-link-logout">
+        <a href="<?= url('src/controllers/logout.php') ?>" class="sidebar-link sidebar-link-logout">
             <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M9 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                 <path d="M16 17L21 12L16 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
