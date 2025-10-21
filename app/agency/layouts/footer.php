@@ -8,11 +8,11 @@
                     &copy; <?= date('Y') ?> MonVolEnLigne - Espace Agence
                 </p>
                 <div class="footer-links">
-                    <a href="/app/landing/politique-confidentialite.php" class="footer-link">Confidentialité</a>
+                    <a href="<?= url('app/landing/politique-confidentialite.php') ?>" class="footer-link">Confidentialité</a>
                     <span class="footer-separator">•</span>
-                    <a href="/app/landing/conditions-utilisation.php" class="footer-link">Conditions</a>
+                    <a href="<?= url('app/landing/conditions-utilisation.php') ?>" class="footer-link">Conditions</a>
                     <span class="footer-separator">•</span>
-                    <a href="/app/landing/contact.php" class="footer-link">Support</a>
+                    <a href="<?= url('app/landing/contact.php') ?>" class="footer-link">Support</a>
                 </div>
             </div>
         </footer>

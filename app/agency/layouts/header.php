@@ -6,13 +6,16 @@
  * Variables attendues: $page_title, $breadcrumb (optionnel)
  */
 
+// Inclure la configuration
+require_once __DIR__ . '/../../../config/config.php';
+
 // Vérifier que l'utilisateur est connecté et est une AGENCE
 if (
     !isset($_SESSION["logged_in"]) ||
     !$_SESSION["logged_in"] ||
     $_SESSION["user_type"] !== "AGENCE"
 ) {
-    header("Location: /app/auth/connexion-agence.php");
+    header("Location: " . url('app/auth/connexion-agence.php'));
     exit();
 }
 
@@ -35,8 +38,8 @@ $breadcrumb = $breadcrumb ?? [];
     <title><?= htmlspecialchars($page_title) ?> - MonVolEnLigne Agence</title>
 
     <!-- CSS Global -->
-    <link rel="stylesheet" href="/public/main.css">
-    <link rel="stylesheet" href="/public/assets/css/animations.css">
+    <link rel="stylesheet" href="<?= asset('main.css') ?>">
+    <link rel="stylesheet" href="<?= asset('assets/css/animations.css') ?>">
 
     <!-- CSS Agency -->
     <link rel="stylesheet" href="assets/css/base.css">
@@ -167,7 +170,7 @@ $breadcrumb = $breadcrumb ?? [];
                                     Dashboard
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a href="/src/controllers/logout.php" class="dropdown-link dropdown-link-danger">
+                                <a href="<?= url('src/controllers/logout.php') ?>" class="dropdown-link dropdown-link-danger">
                                     <svg class="dropdown-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M9 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                         <path d="M16 17L21 12L16 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />

@@ -43,7 +43,7 @@
                         </li>
                     </ul>
 
-                    <a href="demande-compagnie.php" class="partner-cta-btn partner-cta-btn-airline">
+                    <a href="<?= url('app/forms/demande-compagnie.php') ?>" class="partner-cta-btn partner-cta-btn-airline">
                         <span>Devenir partenaire</span>
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -92,7 +92,7 @@
                         </li>
                     </ul>
 
-                    <a href="demande-agence.php" class="partner-cta-btn partner-cta-btn-agency">
+                    <a href="<?= url('app/forms/demande-agence.php') ?>" class="partner-cta-btn partner-cta-btn-agency">
                         <span>Rejoignez-nous</span>
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M5 12h14M12 5l7 7-7 7"/>
