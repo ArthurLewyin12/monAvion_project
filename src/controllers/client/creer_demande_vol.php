@@ -251,12 +251,11 @@ try {
     );
 
     $_SESSION['success_message'] = "Votre demande a été envoyée avec succès à {$agence['nom_agence']} ! Vous recevrez une réponse rapidement.";
-    header("Location: /app/client/home.php");
+    header("Location: ../../../app/client/home.php");
     exit();
-
 } catch (Exception $e) {
     $pdo->rollBack();
     $_SESSION['error_message'] = "Erreur lors de l'envoi de la demande : " . $e->getMessage();
-    header("Location: /app/client/demander-assistance.php");
+    header("Location: ../../../app/client/demander-assistance.php");
     exit();
 }

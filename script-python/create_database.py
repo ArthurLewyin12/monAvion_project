@@ -6,10 +6,10 @@ import datetime
 DB_HOST = "localhost"
 DB_USER = "root"
 DB_PASSWORD = ""
-DB_NAME = "dbavion2"
+DB_NAME = "dbavion3"
 
 # --- Error Log File ---
-ERROR_LOG_FILE = "database_errors.md"
+ERROR_LOG_FILE = "./database_errors.md"
 
 def log_error(error_message):
     """Appends an error message to the markdown log file."""
@@ -20,158 +20,437 @@ def log_error(error_message):
         f.write(f"{error_message}\n")
         f.write("```\n\n")
 
-# --- SQL Statements for creating tables ---
+# --- SQL Statements for creating tables (from db.sql) ---
 TABLES = {}
 
-TABLES['users'] = (
-    """CREATE TABLE `users` (
-    `id` BIGINT AUTO_INCREMENT PRIMARY KEY,
-    `firstname` VARCHAR(100) NOT NULL,
-    `lastname` VARCHAR(100) NOT NULL,
-    `email` VARCHAR(100) UNIQUE NOT NULL,
-    `contact` VARCHAR(20),
-    `password` VARCHAR(255) NOT NULL,
-    `avatar` VARCHAR(500),
-    `current_status` ENUM('ACTIVE', 'INACTIVE', 'SUSPENDED') DEFAULT 'ACTIVE',
-    `user_type` ENUM('AIRLINE', 'AGENCY', 'ADMIN', 'CLIENT') DEFAULT 'AGENCY',
-    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    `deleted_at` TIMESTAMP NULL,
-    `created_by` BIGINT NULL,
-    `updated_by` BIGINT NULL,
-    `deleted_by` BIGINT NULL,
-    INDEX `idx_email` (`email`),
-    INDEX `idx_contact` (`contact`),
-    INDEX `idx_user_type` (`user_type`),
-    INDEX `idx_status` (`current_status`),
-    FOREIGN KEY (created_by) REFERENCES users(id),
-    FOREIGN KEY (updated_by) REFERENCES users(id),
-    FOREIGN KEY (deleted_by) REFERENCES users(id)
-    ) ENGINE=InnoDB""")
+TABLES['utilisateurs'] = (
+    """CREATE TABLE `utilisateurs` (
+        `id` BIGINT AUTO_INCREMENT PRIMARY KEY,
+        `prenom` VARCHAR(100) NOT NULL,
+        `nom` VARCHAR(100) NOT NULL,
+        `email` VARCHAR(100) UNIQUE NOT NULL,
+        `telephone` VARCHAR(20),
+        `mot_de_passe` VARCHAR(255) NOT NULL,
+        `premiere_connexion` BOOLEAN DEFAULT FALSE,
+        `avatar` VARCHAR(500),
+        `abonnement_newsletter` BOOLEAN DEFAULT FALSE,
+        `statut_actuel` ENUM('ACTIF', 'INACTIF', 'SUSPENDU') DEFAULT 'ACTIF',
+        `type_utilisateur` ENUM('COMPAGNIE', 'AGENCE', 'ADMIN', 'CLIENT') DEFAULT 'CLIENT',
+        `date_creation` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        `date_modification` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        `date_suppression` TIMESTAMP NULL,
+        `cree_par` BIGINT NULL,
+        `modifie_par` BIGINT NULL,
+        `supprime_par` BIGINT NULL,
+        INDEX `idx_email` (`email`),
+        INDEX `idx_telephone` (`telephone`),
+        INDEX `idx_type_utilisateur` (`type_utilisateur`),
+        INDEX `idx_statut` (`statut_actuel`),
+        FOREIGN KEY (`cree_par`) REFERENCES `utilisateurs`(`id`),
+        FOREIGN KEY (`modifie_par`) REFERENCES `utilisateurs`(`id`),
+        FOREIGN KEY (`supprime_par`) REFERENCES `utilisateurs`(`id`)
+    ) ENGINE=InnoDB"""
+)
 
-TABLES['airlines'] = (
-    """CREATE TABLE `airlines` (
-    `id` BIGINT AUTO_INCREMENT PRIMARY KEY,
-    `user_id` BIGINT UNIQUE NOT NULL,
-    `company_name` VARCHAR(200) NOT NULL,
-    `iata_code` VARCHAR(3) UNIQUE,
-    `description` TEXT,
-    `country` VARCHAR(100) DEFAULT 'France',
-    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    `deleted_at` TIMESTAMP NULL,
-    `created_by` BIGINT NULL,
-    `updated_by` BIGINT NULL,
-    `deleted_by` BIGINT NULL,
-    INDEX `idx_user_id` (`user_id`),
-    FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE,
-    FOREIGN KEY (`created_by`) REFERENCES `users`(`id`),
-    FOREIGN KEY (`updated_by`) REFERENCES `users`(`id`),
-    FOREIGN KEY (`deleted_by`) REFERENCES `users`(`id`)
-    ) ENGINE=InnoDB""")
+TABLES['compagnies_aeriennes'] = (
+    """CREATE TABLE `compagnies_aeriennes` (
+        `id` BIGINT AUTO_INCREMENT PRIMARY KEY,
+        `utilisateur_id` BIGINT UNIQUE NOT NULL,
+        `nom_compagnie` VARCHAR(200) NOT NULL,
+        `code_iata` VARCHAR(3) UNIQUE,
+        `description` TEXT,
+        `pays` VARCHAR(100) DEFAULT 'France',
+        `taille_flotte` INT DEFAULT NULL,
+        `date_creation` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        `date_modification` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        `date_suppression` TIMESTAMP NULL,
+        `cree_par` BIGINT NULL,
+        `modifie_par` BIGINT NULL,
+        `supprime_par` BIGINT NULL,
+        INDEX `idx_utilisateur_id` (`utilisateur_id`),
+        FOREIGN KEY (`utilisateur_id`) REFERENCES `utilisateurs`(`id`) ON DELETE CASCADE,
+        FOREIGN KEY (`cree_par`) REFERENCES `utilisateurs`(`id`),
+        FOREIGN KEY (`modifie_par`) REFERENCES `utilisateurs`(`id`),
+        FOREIGN KEY (`supprime_par`) REFERENCES `utilisateurs`(`id`)
+    ) ENGINE=InnoDB"""
+)
 
-TABLES['agencies'] = (
-    """CREATE TABLE `agencies` (
-    `id` BIGINT AUTO_INCREMENT PRIMARY KEY,
-    `user_id` BIGINT UNIQUE NOT NULL,
-    `agency_name` VARCHAR(200) NOT NULL,
-    `license_number` VARCHAR(50) UNIQUE,
-    `address` TEXT,
-    `phone` VARCHAR(20),
-    `warnings_count` INT DEFAULT 0,
-    `current_status` ENUM('ACTIVE', 'INACTIVE', 'SUSPENDED') DEFAULT 'ACTIVE',
-    `registration_date` DATE DEFAULT (CURDATE()),
-    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    `deleted_at` TIMESTAMP NULL,
-    `created_by` BIGINT NULL,
-    `updated_by` BIGINT NULL,
-    `deleted_by` BIGINT NULL,
-    INDEX `idx_user_id` (`user_id`),
-    INDEX `idx_status` (`current_status`),
-    INDEX `idx_warnings` (`warnings_count`),
-    FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE,
-    FOREIGN KEY (`created_by`) REFERENCES `users`(`id`),
-    FOREIGN KEY (`updated_by`) REFERENCES `users`(`id`),
-    FOREIGN KEY (`deleted_by`) REFERENCES `users`(`id`)
-    ) ENGINE=InnoDB""")
+TABLES['agences'] = (
+    """CREATE TABLE `agences` (
+        `id` BIGINT AUTO_INCREMENT PRIMARY KEY,
+        `utilisateur_id` BIGINT UNIQUE NOT NULL,
+        `nom_agence` VARCHAR(200) NOT NULL,
+        `numero_licence` VARCHAR(50) UNIQUE,
+        `adresse` TEXT,
+        `telephone` VARCHAR(20),
+        `pays` VARCHAR(100) DEFAULT 'France',
+        `nombre_employes` INT DEFAULT NULL,
+        `nombre_avertissements` INT DEFAULT 0,
+        `statut_actuel` ENUM('ACTIF', 'INACTIF', 'SUSPENDU') DEFAULT 'ACTIF',
+        `date_inscription` DATE NULL,
+        `date_creation` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        `date_modification` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        `date_suppression` TIMESTAMP NULL,
+        `cree_par` BIGINT NULL,
+        `modifie_par` BIGINT NULL,
+        `supprime_par` BIGINT NULL,
+        INDEX `idx_utilisateur_id` (`utilisateur_id`),
+        INDEX `idx_statut` (`statut_actuel`),
+        INDEX `idx_avertissements` (`nombre_avertissements`),
+        FOREIGN KEY (`utilisateur_id`) REFERENCES `utilisateurs`(`id`) ON DELETE CASCADE,
+        FOREIGN KEY (`cree_par`) REFERENCES `utilisateurs`(`id`),
+        FOREIGN KEY (`modifie_par`) REFERENCES `utilisateurs`(`id`),
+        FOREIGN KEY (`supprime_par`) REFERENCES `utilisateurs`(`id`)
+    ) ENGINE=InnoDB"""
+)
 
-TABLES['admin_profiles'] = (
-    """CREATE TABLE `admin_profiles` (
-    `id` BIGINT AUTO_INCREMENT PRIMARY KEY,
-    `user_id` BIGINT UNIQUE NOT NULL,
-    `full_name` VARCHAR(200) NOT NULL,
-    `department` VARCHAR(100),
-    `access_level` ENUM('JUNIOR', 'SENIOR', 'SUPER') DEFAULT 'JUNIOR',
-    `last_audit_date` TIMESTAMP NULL,
-    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    `deleted_at` TIMESTAMP NULL,
-    `created_by` BIGINT NULL,
-    `updated_by` BIGINT NULL,
-    `deleted_by` BIGINT NULL,
-    INDEX `idx_user_id` (`user_id`),
-    INDEX `idx_access_level` (`access_level`),
-    FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE,
-    FOREIGN KEY (`created_by`) REFERENCES `users`(`id`),
-    FOREIGN KEY (`updated_by`) REFERENCES `users`(`id`),
-    FOREIGN KEY (`deleted_by`) REFERENCES `users`(`id`)
-    ) ENGINE=InnoDB""")
+TABLES['profils_admin'] = (
+    """CREATE TABLE `profils_admin` (
+        `id` BIGINT AUTO_INCREMENT PRIMARY KEY,
+        `utilisateur_id` BIGINT UNIQUE NOT NULL,
+        `nom_complet` VARCHAR(200) NOT NULL,
+        `departement` VARCHAR(100),
+        `niveau_acces` ENUM('JUNIOR', 'SENIOR', 'SUPER') DEFAULT 'JUNIOR',
+        `date_dernier_audit` TIMESTAMP NULL,
+        `date_creation` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        `date_modification` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        `date_suppression` TIMESTAMP NULL,
+        `cree_par` BIGINT NULL,
+        `modifie_par` BIGINT NULL,
+        `supprime_par` BIGINT NULL,
+        INDEX `idx_utilisateur_id` (`utilisateur_id`),
+        INDEX `idx_niveau_acces` (`niveau_acces`),
+        FOREIGN KEY (`utilisateur_id`) REFERENCES `utilisateurs`(`id`) ON DELETE CASCADE,
+        FOREIGN KEY (`cree_par`) REFERENCES `utilisateurs`(`id`),
+        FOREIGN KEY (`modifie_par`) REFERENCES `utilisateurs`(`id`),
+        FOREIGN KEY (`supprime_par`) REFERENCES `utilisateurs`(`id`)
+    ) ENGINE=InnoDB"""
+)
 
-TABLES['aircrafts'] = (
-    """CREATE TABLE `aircrafts` (
-    `id` BIGINT AUTO_INCREMENT PRIMARY KEY,
-    `model` VARCHAR(100) NOT NULL,
-    `airline_id` BIGINT NOT NULL,
-    `total_seats` INT NOT NULL,
-    `seats_per_class` JSON,
-    `description` TEXT,
-    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    `deleted_at` TIMESTAMP NULL,
-    `created_by` BIGINT NULL,
-    `updated_by` BIGINT NULL,
-    `deleted_by` BIGINT NULL,
-    INDEX `idx_airline_id` (`airline_id`),
-    FOREIGN KEY (`airline_id`) REFERENCES `airlines`(`id`) ON DELETE CASCADE,
-    FOREIGN KEY (`created_by`) REFERENCES `users`(`id`),
-    FOREIGN KEY (`updated_by`) REFERENCES `users`(`id`),
-    FOREIGN KEY (`deleted_by`) REFERENCES `users`(`id`)
-    ) ENGINE=InnoDB""")
+TABLES['avions'] = (
+    """CREATE TABLE `avions` (
+        `id` BIGINT AUTO_INCREMENT PRIMARY KEY,
+        `modele` VARCHAR(100) NOT NULL,
+        `compagnie_id` BIGINT NOT NULL,
+        `nombre_sieges_total` INT NOT NULL,
+        `sieges_par_classe` JSON,
+        `description` TEXT,
+        `date_creation` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        `date_modification` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        `date_suppression` TIMESTAMP NULL,
+        `cree_par` BIGINT NULL,
+        `modifie_par` BIGINT NULL,
+        `supprime_par` BIGINT NULL,
+        INDEX `idx_compagnie_id` (`compagnie_id`),
+        FOREIGN KEY (`compagnie_id`) REFERENCES `compagnies_aeriennes`(`id`) ON DELETE CASCADE,
+        FOREIGN KEY (`cree_par`) REFERENCES `utilisateurs`(`id`),
+        FOREIGN KEY (`modifie_par`) REFERENCES `utilisateurs`(`id`),
+        FOREIGN KEY (`supprime_par`) REFERENCES `utilisateurs`(`id`)
+    ) ENGINE=InnoDB"""
+)
 
-TABLES['flights'] = (
-    """CREATE TABLE `flights` (
-    `id` BIGINT AUTO_INCREMENT PRIMARY KEY,
-    `flight_number` VARCHAR(20) NOT NULL,
-    `departure_airport` VARCHAR(3) NOT NULL,
-    `arrival_airport` VARCHAR(3) NOT NULL,
-    `departure_date` DATETIME NOT NULL,
-    `arrival_date` DATETIME NOT NULL,
-    `airline_id` BIGINT NOT NULL,
-    `aircraft_id` BIGINT NOT NULL,
-    `status` ENUM('SCHEDULED', 'DELAYED', 'CANCELLED') DEFAULT 'SCHEDULED',
-    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    `deleted_at` TIMESTAMP NULL,
-    `created_by` BIGINT NULL,
-    `updated_by` BIGINT NULL,
-    `deleted_by` BIGINT NULL,
-    INDEX `idx_flight_number` (`flight_number`),
-    INDEX `idx_departure` (`departure_airport`, `departure_date`),
-    INDEX `idx_arrival` (`arrival_airport`, `arrival_date`),
-    INDEX `idx_airline_id` (`airline_id`),
-    INDEX `idx_aircraft_id` (`aircraft_id`),
-    INDEX `idx_status` (`status`),
-    FOREIGN KEY (`airline_id`) REFERENCES `airlines`(`id`) ON DELETE CASCADE,
-    FOREIGN KEY (`aircraft_id`) REFERENCES `aircrafts`(`id`) ON DELETE RESTRICT,
-    FOREIGN KEY (`created_by`) REFERENCES `users`(`id`),
-    FOREIGN KEY (`updated_by`) REFERENCES `users`(`id`),
-    FOREIGN KEY (`deleted_by`) REFERENCES `users`(`id`)
-    ) ENGINE=InnoDB""")
+TABLES['vols'] = (
+    """CREATE TABLE `vols` (
+        `id` BIGINT AUTO_INCREMENT PRIMARY KEY,
+        `numero_vol` VARCHAR(20) NOT NULL,
+        `aeroport_depart` VARCHAR(3) NOT NULL,
+        `aeroport_arrivee` VARCHAR(3) NOT NULL,
+        `date_depart` DATETIME NOT NULL,
+        `date_arrivee` DATETIME NOT NULL,
+        `compagnie_id` BIGINT NOT NULL,
+        `avion_id` BIGINT NOT NULL,
+        `statut` ENUM('PROGRAMME', 'RETARDE', 'ANNULE') DEFAULT 'PROGRAMME',
+        `date_creation` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        `date_modification` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        `date_suppression` TIMESTAMP NULL,
+        `cree_par` BIGINT NULL,
+        `modifie_par` BIGINT NULL,
+        `supprime_par` BIGINT NULL,
+        INDEX `idx_numero_vol` (`numero_vol`),
+        INDEX `idx_depart` (`aeroport_depart`, `date_depart`),
+        INDEX `idx_arrivee` (`aeroport_arrivee`, `date_arrivee`),
+        INDEX `idx_compagnie_id` (`compagnie_id`),
+        INDEX `idx_avion_id` (`avion_id`),
+        INDEX `idx_statut` (`statut`),
+        FOREIGN KEY (`compagnie_id`) REFERENCES `compagnies_aeriennes`(`id`) ON DELETE CASCADE,
+        FOREIGN KEY (`avion_id`) REFERENCES `avions`(`id`) ON DELETE RESTRICT,
+        FOREIGN KEY (`cree_par`) REFERENCES `utilisateurs`(`id`),
+        FOREIGN KEY (`modifie_par`) REFERENCES `utilisateurs`(`id`),
+        FOREIGN KEY (`supprime_par`) REFERENCES `utilisateurs`(`id`)
+    ) ENGINE=InnoDB"""
+)
+
+TABLES['tarifs'] = (
+    """CREATE TABLE `tarifs` (
+        `id` BIGINT AUTO_INCREMENT PRIMARY KEY,
+        `vol_id` BIGINT NOT NULL,
+        `type_classe` ENUM('ECONOMIQUE', 'AFFAIRE', 'PREMIERE') NOT NULL,
+        `prix` DECIMAL(10, 2) NOT NULL,
+        `devise` VARCHAR(3) DEFAULT 'EUR',
+        `disponibilite` INT DEFAULT 0,
+        `date_creation` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        `date_modification` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        `date_suppression` TIMESTAMP NULL,
+        `cree_par` BIGINT NULL,
+        `modifie_par` BIGINT NULL,
+        `supprime_par` BIGINT NULL,
+        INDEX `idx_vol_id` (`vol_id`),
+        INDEX `idx_classe` (`type_classe`),
+        INDEX `idx_prix` (`prix`),
+        FOREIGN KEY (`vol_id`) REFERENCES `vols`(`id`) ON DELETE CASCADE,
+        FOREIGN KEY (`cree_par`) REFERENCES `utilisateurs`(`id`),
+        FOREIGN KEY (`modifie_par`) REFERENCES `utilisateurs`(`id`),
+        FOREIGN KEY (`supprime_par`) REFERENCES `utilisateurs`(`id`)
+    ) ENGINE=InnoDB"""
+)
+
+TABLES['sieges'] = (
+    """CREATE TABLE `sieges` (
+        `id` BIGINT AUTO_INCREMENT PRIMARY KEY,
+        `vol_id` BIGINT NOT NULL,
+        `numero_siege` VARCHAR(10) NOT NULL,
+        `type_classe` ENUM('ECONOMIQUE', 'AFFAIRE', 'PREMIERE') NOT NULL,
+        `statut` ENUM('DISPONIBLE', 'RESERVE', 'ANNULE') DEFAULT 'DISPONIBLE',
+        `date_creation` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        `date_modification` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        `date_suppression` TIMESTAMP NULL,
+        `cree_par` BIGINT NULL,
+        `modifie_par` BIGINT NULL,
+        `supprime_par` BIGINT NULL,
+        UNIQUE KEY `uk_siege_vol` (`vol_id`, `numero_siege`),
+        INDEX `idx_vol_id` (`vol_id`),
+        INDEX `idx_statut` (`statut`),
+        INDEX `idx_classe` (`type_classe`),
+        FOREIGN KEY (`vol_id`) REFERENCES `vols`(`id`) ON DELETE CASCADE,
+        FOREIGN KEY (`cree_par`) REFERENCES `utilisateurs`(`id`),
+        FOREIGN KEY (`modifie_par`) REFERENCES `utilisateurs`(`id`),
+        FOREIGN KEY (`supprime_par`) REFERENCES `utilisateurs`(`id`)
+    ) ENGINE=InnoDB"""
+)
+
+TABLES['reservations'] = (
+    """CREATE TABLE `reservations` (
+        `id` BIGINT AUTO_INCREMENT PRIMARY KEY,
+        `numero_reservation` VARCHAR(50) UNIQUE NOT NULL,
+        `agence_id` BIGINT NULL,
+        `client_id` BIGINT NULL,
+        `type_reservation` ENUM('DIRECTE', 'PAR_AGENCE') NOT NULL,
+        `vol_id` BIGINT NOT NULL,
+        `siege_id` BIGINT NOT NULL,
+        `statut` ENUM('EN_ATTENTE', 'CONFIRMEE', 'ANNULEE') DEFAULT 'EN_ATTENTE',
+        `montant_total` DECIMAL(10, 2) NOT NULL,
+        `devise` VARCHAR(3) DEFAULT 'EUR',
+        `mode_paiement` ENUM('CARTE', 'PAYPAL', 'AGENCE') DEFAULT 'CARTE',
+        `statut_paiement` ENUM('EN_ATTENTE', 'PAYE') DEFAULT 'EN_ATTENTE',
+        `date_creation` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        `date_modification` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        `date_suppression` TIMESTAMP NULL,
+        `cree_par` BIGINT NULL,
+        `modifie_par` BIGINT NULL,
+        `supprime_par` BIGINT NULL,
+        INDEX `idx_numero_reservation` (`numero_reservation`),
+        INDEX `idx_agence_id` (`agence_id`),
+        INDEX `idx_client_id` (`client_id`),
+        INDEX `idx_vol_id` (`vol_id`),
+        INDEX `idx_statut` (`statut`),
+        INDEX `idx_type_reservation` (`type_reservation`),
+        FOREIGN KEY (`agence_id`) REFERENCES `agences`(`id`) ON DELETE RESTRICT,
+        FOREIGN KEY (`client_id`) REFERENCES `utilisateurs`(`id`) ON DELETE RESTRICT,
+        FOREIGN KEY (`vol_id`) REFERENCES `vols`(`id`) ON DELETE RESTRICT,
+        FOREIGN KEY (`siege_id`) REFERENCES `sieges`(`id`) ON DELETE RESTRICT,
+        FOREIGN KEY (`cree_par`) REFERENCES `utilisateurs`(`id`),
+        FOREIGN KEY (`modifie_par`) REFERENCES `utilisateurs`(`id`),
+        FOREIGN KEY (`supprime_par`) REFERENCES `utilisateurs`(`id`),
+        CONSTRAINT `chk_reservation_type` CHECK (
+            (`type_reservation` = 'PAR_AGENCE' AND `agence_id` IS NOT NULL AND `client_id` IS NULL) OR
+            (`type_reservation` = 'DIRECTE' AND `client_id` IS NOT NULL AND `agence_id` IS NULL)
+        )
+    ) ENGINE=InnoDB"""
+)
+
+TABLES['passagers'] = (
+    """CREATE TABLE `passagers` (
+        `id` BIGINT AUTO_INCREMENT PRIMARY KEY,
+        `reservation_id` BIGINT NOT NULL,
+        `utilisateur_id` BIGINT NULL,
+        `prenom` VARCHAR(100) NOT NULL,
+        `nom` VARCHAR(100) NOT NULL,
+        `numero_passeport` VARCHAR(50),
+        `date_naissance` DATE,
+        `nationalite` VARCHAR(100),
+        `telephone` VARCHAR(20),
+        `email` VARCHAR(255),
+        `date_creation` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        `date_modification` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        `date_suppression` TIMESTAMP NULL,
+        `cree_par` BIGINT NULL,
+        `modifie_par` BIGINT NULL,
+        `supprime_par` BIGINT NULL,
+        INDEX `idx_reservation_id` (`reservation_id`),
+        INDEX `idx_utilisateur_id` (`utilisateur_id`),
+        FOREIGN KEY (`reservation_id`) REFERENCES `reservations`(`id`) ON DELETE CASCADE,
+        FOREIGN KEY (`utilisateur_id`) REFERENCES `utilisateurs`(`id`) ON DELETE SET NULL,
+        FOREIGN KEY (`cree_par`) REFERENCES `utilisateurs`(`id`),
+        FOREIGN KEY (`modifie_par`) REFERENCES `utilisateurs`(`id`),
+        FOREIGN KEY (`supprime_par`) REFERENCES `utilisateurs`(`id`)
+    ) ENGINE=InnoDB"""
+)
+
+TABLES['billets'] = (
+    """CREATE TABLE `billets` (
+        `id` BIGINT AUTO_INCREMENT PRIMARY KEY,
+        `reservation_id` BIGINT NOT NULL,
+        `numero_billet` VARCHAR(50) UNIQUE NOT NULL,
+        `url_pdf` VARCHAR(500),
+        `date_emission` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        `date_creation` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        `date_modification` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        `date_suppression` TIMESTAMP NULL,
+        `cree_par` BIGINT NULL,
+        `modifie_par` BIGINT NULL,
+        `supprime_par` BIGINT NULL,
+        INDEX `idx_reservation_id` (`reservation_id`),
+        INDEX `idx_numero_billet` (`numero_billet`),
+        FOREIGN KEY (`reservation_id`) REFERENCES `reservations`(`id`) ON DELETE CASCADE,
+        FOREIGN KEY (`cree_par`) REFERENCES `utilisateurs`(`id`),
+        FOREIGN KEY (`modifie_par`) REFERENCES `utilisateurs`(`id`),
+        FOREIGN KEY (`supprime_par`) REFERENCES `utilisateurs`(`id`)
+    ) ENGINE=InnoDB"""
+)
+
+TABLES['historique_statuts_reservations'] = (
+    """CREATE TABLE `historique_statuts_reservations` (
+        `id` BIGINT AUTO_INCREMENT PRIMARY KEY,
+        `reservation_id` BIGINT NOT NULL,
+        `statut` ENUM('EN_ATTENTE', 'CONFIRMEE', 'ANNULEE') NOT NULL,
+        `statut_precedent` ENUM('EN_ATTENTE', 'CONFIRMEE', 'ANNULEE') NULL,
+        `raison` TEXT NULL,
+        `commentaire` TEXT NULL,
+        `date_creation` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        `cree_par` BIGINT NULL,
+        INDEX `idx_reservation_id` (`reservation_id`),
+        INDEX `idx_statut` (`statut`),
+        INDEX `idx_date_creation` (`date_creation`),
+        FOREIGN KEY (`reservation_id`) REFERENCES `reservations`(`id`) ON DELETE CASCADE,
+        FOREIGN KEY (`cree_par`) REFERENCES `utilisateurs`(`id`)
+    ) ENGINE=InnoDB"""
+)
+
+TABLES['historique_statuts_admin'] = (
+    """CREATE TABLE `historique_statuts_admin` (
+        `id` BIGINT AUTO_INCREMENT PRIMARY KEY,
+        `profil_admin_id` BIGINT NOT NULL,
+        `statut` ENUM('ACTIF', 'SUSPENDU', 'DEGRADE') NOT NULL,
+        `statut_precedent` ENUM('ACTIF', 'SUSPENDU', 'DEGRADE') NULL,
+        `raison` TEXT NULL,
+        `commentaire` TEXT NULL,
+        `date_creation` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        `cree_par` BIGINT NULL,
+        INDEX `idx_profil_admin_id` (`profil_admin_id`),
+        INDEX `idx_statut` (`statut`),
+        INDEX `idx_date_creation` (`date_creation`),
+        FOREIGN KEY (`profil_admin_id`) REFERENCES `profils_admin`(`id`) ON DELETE CASCADE,
+        FOREIGN KEY (`cree_par`) REFERENCES `utilisateurs`(`id`)
+    ) ENGINE=InnoDB"""
+)
+
+TABLES['demandes_vols'] = (
+    """CREATE TABLE `demandes_vols` (
+        `id` BIGINT AUTO_INCREMENT PRIMARY KEY,
+        `client_utilisateur_id` BIGINT NOT NULL,
+        `agence_id` BIGINT NULL COMMENT 'NULL si pas encore assignée à une agence',
+        `aeroport_depart` VARCHAR(10) NOT NULL,
+        `aeroport_arrivee` VARCHAR(10) NOT NULL,
+        `date_depart` DATE NOT NULL,
+        `date_retour` DATE NULL,
+        `nombre_passagers` INT NOT NULL,
+        `classe_desiree` ENUM('ECONOMIQUE', 'AFFAIRE', 'PREMIERE') NOT NULL,
+        `notes_supplementaires` TEXT,
+        `statut` ENUM('NOUVELLE', 'VUE', 'TRAITEE', 'FERMEE') DEFAULT 'NOUVELLE',
+        `date_creation` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        `date_modification` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        INDEX `idx_client_id` (`client_utilisateur_id`),
+        INDEX `idx_agence_id` (`agence_id`),
+        INDEX `idx_statut` (`statut`),
+        FOREIGN KEY (`client_utilisateur_id`) REFERENCES `utilisateurs`(`id`) ON DELETE CASCADE,
+        FOREIGN KEY (`agence_id`) REFERENCES `agences`(`id`) ON DELETE CASCADE
+    ) ENGINE=InnoDB"""
+)
+
+TABLES['demandes_agences'] = (
+    """CREATE TABLE `demandes_agences` (
+        `id` BIGINT AUTO_INCREMENT PRIMARY KEY,
+        `nom_agence` VARCHAR(200) NOT NULL,
+        `numero_licence` VARCHAR(50) NOT NULL,
+        `pays` VARCHAR(100) NOT NULL,
+        `adresse` TEXT NOT NULL,
+        `nom_contact` VARCHAR(200) NOT NULL,
+        `email` VARCHAR(191) NOT NULL,
+        `telephone` VARCHAR(20) NOT NULL,
+        `nombre_employes` INT NULL,
+        `message` TEXT NOT NULL,
+        `statut` ENUM('EN_ATTENTE', 'APPROUVEE', 'REJETEE') DEFAULT 'EN_ATTENTE',
+        `date_creation` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        `date_modification` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        `examine_par` BIGINT NULL,
+        `date_examen` TIMESTAMP NULL,
+        `raison_rejet` TEXT NULL,
+        INDEX `idx_statut` (`statut`),
+        INDEX `idx_email` (`email`),
+        INDEX `idx_date_creation` (`date_creation`),
+        FOREIGN KEY (`examine_par`) REFERENCES `utilisateurs`(`id`)
+    ) ENGINE=InnoDB"""
+)
+
+TABLES['demandes_compagnies'] = (
+    """CREATE TABLE `demandes_compagnies` (
+        `id` BIGINT AUTO_INCREMENT PRIMARY KEY,
+        `nom_compagnie` VARCHAR(200) NOT NULL,
+        `code_iata` VARCHAR(3) NOT NULL,
+        `pays` VARCHAR(100) NOT NULL,
+        `nom_contact` VARCHAR(200) NOT NULL,
+        `email` VARCHAR(191) NOT NULL,
+        `telephone` VARCHAR(20) NOT NULL,
+        `taille_flotte` INT NULL,
+        `message` TEXT NOT NULL,
+        `statut` ENUM('EN_ATTENTE', 'APPROUVEE', 'REJETEE') DEFAULT 'EN_ATTENTE',
+        `date_creation` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        `date_modification` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        `examine_par` BIGINT NULL,
+        `date_examen` TIMESTAMP NULL,
+        `raison_rejet` TEXT NULL,
+        INDEX `idx_statut` (`statut`),
+        INDEX `idx_email` (`email`),
+        INDEX `idx_date_creation` (`date_creation`),
+        FOREIGN KEY (`examine_par`) REFERENCES `utilisateurs`(`id`)
+    ) ENGINE=InnoDB"""
+)
+
+TABLES['messages_contact'] = (
+    """CREATE TABLE `messages_contact` (
+        `id` BIGINT AUTO_INCREMENT PRIMARY KEY,
+        `nom` VARCHAR(200) NOT NULL,
+        `email` VARCHAR(191) NOT NULL,
+        `telephone` VARCHAR(20) NULL,
+        `sujet` ENUM('demo', 'information', 'partenariat', 'support', 'autre') NOT NULL,
+        `message` TEXT NOT NULL,
+        `statut` ENUM('NOUVEAU', 'LU', 'REPONDU', 'FERME') DEFAULT 'NOUVEAU',
+        `date_creation` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        `date_modification` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        `repondu_par` BIGINT NULL,
+        `date_reponse` TIMESTAMP NULL,
+        `message_reponse` TEXT NULL,
+        INDEX `idx_statut` (`statut`),
+        INDEX `idx_email` (`email`),
+        INDEX `idx_sujet` (`sujet`),
+        INDEX `idx_date_creation` (`date_creation`),
+        FOREIGN KEY (`repondu_par`) REFERENCES `utilisateurs`(`id`)
+    ) ENGINE=InnoDB"""
+)
 
 
 def main():
-    """Connects to the database, creates it if not exists, and creates all tables and triggers."""
+    """Connects to the database, creates it if not exists, and creates all tables."""
     cnx = None
     cursor = None
     try:
@@ -183,6 +462,16 @@ def main():
         )
         cursor = cnx.cursor()
         print("Successfully connected to MySQL server.")
+
+        # Drop database if it exists for a clean setup
+        try:
+            cursor.execute(f"DROP DATABASE IF EXISTS `{DB_NAME}`")
+            print(f"Database '{DB_NAME}' dropped.")
+        except mysql.connector.Error as err:
+            error_msg = f"Failed to drop database: {err}"
+            print(error_msg)
+            log_error(error_msg)
+            raise
 
         # Create and select the database
         try:
@@ -210,22 +499,8 @@ def main():
                     error_msg = f"Error creating table {table_name}: {err.msg}"
                     print(error_msg)
                     log_error(error_msg)
-                    raise
+                    # We will not raise here to allow the script to continue with other tables
         
-        # Create Trigger
-        try:
-            print("Creating trigger `update_users_updated_at`: ", end='')
-            trigger_core_command = "CREATE TRIGGER `update_users_updated_at` BEFORE UPDATE ON `users` FOR EACH ROW SET NEW.updated_at = CURRENT_TIMESTAMP"
-            cursor.execute(trigger_core_command)
-            print("OK")
-        except mysql.connector.Error as err:
-            if err.errno == 1359: # ER_TRG_ALREADY_EXISTS
-                 print("already exists.")
-            else:
-                error_msg = f"Error creating trigger: {err.msg}"
-                print(error_msg)
-                log_error(error_msg)
-
         print("\nDatabase schema setup completed successfully.")
 
     except mysql.connector.Error as err:

@@ -10,7 +10,7 @@
 
     <div class="page-header">
         <h1 class="page-title">Bonjour, <?= htmlspecialchars($prenom) ?> !</h1>
-        <p class="page-subtitle">Bienvenue sur votre espace personnel FlyManager</p>
+        <p class="page-subtitle">Bienvenue sur votre espace personnel MonVolEnLigne</p>
     </div>
 
     <?php include __DIR__ . '/../components/dashboard-stats.php'; ?>
