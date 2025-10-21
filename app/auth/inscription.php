@@ -1,4 +1,7 @@
 <?php
+// Inclure la configuration
+require_once __DIR__ . '/../../config/config.php';
+
 // Démarrer la session
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -9,16 +12,16 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']) {
     $user_type = $_SESSION['user_type'] ?? null;
     switch ($user_type) {
         case 'ADMIN':
-            header('Location: ../admin/dashboard.php');
+            header('Location: ' . url('app/admin/dashboard.php'));
             exit();
         case 'CLIENT':
-            header('Location: ../client/home.php');
+            header('Location: ' . url('app/client/home.php'));
             exit();
         case 'AGENCE':
-            header('Location: ../agency/home.php');
+            header('Location: ' . url('app/agency/home.php'));
             exit();
         case 'COMPAGNIE':
-            header('Location: ../compagnie/home.php');
+            header('Location: ' . url('app/compagnie/home.php'));
             exit();
     }
 }
@@ -35,7 +38,7 @@ unset($_SESSION['inscription_errors'], $_SESSION['inscription_old']);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscription - MonVolEnLigne</title>
-    <link rel="stylesheet" href="../../public/main.css">
+    <link rel="stylesheet" href="<?= asset('main.css') ?>">
     <link rel="stylesheet" href="assets/css/inscription.css">
 </head>
 
@@ -44,7 +47,7 @@ unset($_SESSION['inscription_errors'], $_SESSION['inscription_old']);
         <!-- PARTIE GAUCHE : Formulaire -->
         <div class="signup-form-side">
             <!-- Bouton retour -->
-            <a href="/app/landing/index.php" class="back-button" title="Retour à l'accueil">
+            <a href="<?= url('app/landing/index.php') ?>" class="back-button" title="Retour à l'accueil">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M19 12H5M12 19l-7-7 7-7" />
                 </svg>
@@ -216,7 +219,7 @@ unset($_SESSION['inscription_errors'], $_SESSION['inscription_old']);
                         <label class="checkbox-wrapper checkbox-wrapper-terms">
                             <input required type="checkbox" name="terms" id="terms">
                             <span class="checkbox-label">
-                                J'accepte les <a href="/public/terms.php" target="_blank" class="terms-link">conditions générales d'utilisation</a> et la <a href="/public/privacy.php" target="_blank" class="terms-link">politique de confidentialité</a>
+                                J'accepte les <a href="<?= url('public/terms.php') ?>" target="_blank" class="terms-link">conditions générales d'utilisation</a> et la <a href="<?= url('public/privacy.php') ?>" target="_blank" class="terms-link">politique de confidentialité</a>
                             </span>
                         </label>
                     </div>

@@ -11,13 +11,13 @@ $current_page = $current_page ?? basename($_SERVER["PHP_SELF"], ".php");
 <!-- Sidebar verticale avec navigation -->
 <aside class="sidebar">
     <div class="sidebar-header">
-        <div class="sidebar-logo">
+        <a href="../../landing/index.php" class="sidebar-logo">
             <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M21 16V8C21 6.9 20.1 6 19 6H5C3.9 6 3 6.9 3 8V16C3 17.1 3.9 18 5 18H19C20.1 18 21 17.1 21 16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                 <path d="M12 6V18M12 6L8 10M12 6L16 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
             <span class="logo-text">MonVolEnLigne</span>
-        </div>
+        </a>
         <span class="sidebar-badge">Agence</span>
     </div>
 

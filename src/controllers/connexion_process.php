@@ -1,12 +1,13 @@
 <?php
 session_start();
+require_once __DIR__ . '/../../config/config.php';
 require_once __DIR__ . '/../../config/db.php';
 require_once __DIR__ . '/../functions/validation.php';
 require_once __DIR__ . '/Auth.php';
 
 // Vérifier que c'est une requête POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: ../../app/auth/connexion.php');
+    header('Location: ' . url('app/auth/connexion.php'));
     exit;
 }
 
@@ -19,7 +20,7 @@ $remember = isset($_POST['remember']);
 if (empty($email) || empty($password)) {
     $_SESSION['login_errors'] = ['Veuillez remplir tous les champs.'];
     $_SESSION['login_email'] = $email;
-    header('Location: ../../app/auth/connexion.php');
+    header('Location: ' . url('app/auth/connexion.php'));
     exit;
 }
 
@@ -50,24 +51,24 @@ if ($result['success']) {
     // Rediriger selon le type d'utilisateur
     switch ($user['type_utilisateur']) {
         case 'ADMIN':
-            header('Location: ../../app/admin/dashboard.php');
+            header('Location: ' . url('app/admin/dashboard.php'));
             break;
         case 'AGENCE':
-            header('Location: ../../app/agency/home.php');
+            header('Location: ' . url('app/agency/home.php'));
             break;
         case 'COMPAGNIE':
-            header('Location: ../../app/airline/home.php');
+            header('Location: ' . url('app/airline/home.php'));
             break;
         case 'CLIENT':
-            header('Location: ../../app/client/home.php');
+            header('Location: ' . url('app/client/home.php'));
             break;
         default:
-            header('Location: ../../app/landing/index.php');
+            header('Location: ' . url('app/landing/index.php'));
     }
     exit;
 } else {
     $_SESSION['login_errors'] = [$result['error']];
     $_SESSION['login_email'] = $email;
-    header('Location: ../../app/auth/connexion.php');
+    header('Location: ' . url('app/auth/connexion.php'));
     exit;
 }
