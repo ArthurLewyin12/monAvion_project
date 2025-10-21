@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion - FlyManager</title>
+    <title>Connexion - MonVolEnLigne</title>
     <link rel="stylesheet" href="../../public/main.css">
     <link rel="stylesheet" href="assets/css/connection.css">
 </head>
@@ -30,7 +30,7 @@
                             <path d="M2 17l10 5 10-5M2 12l10 5 10-5" />
                         </svg>
                     </div>
-                    <h1 class="login-logo-text">FlyManager</h1>
+                    <h1 class="login-logo-text">MonVolEnLigne</h1>
                 </div>
 
                 <!-- En-tête -->
@@ -40,7 +40,7 @@
                 </div>
 
                 <!-- Formulaire -->
-                <form class="login-form" action="/src/controllers/connexion_process.php" method="POST" id="loginForm">
+                <form class="login-form" action="../../src/controllers/connexion_process.php" method="POST" id="loginForm">
                     <!-- Champ Email -->
                     <div class="form-group">
                         <label class="form-label" for="email">Adresse email</label>

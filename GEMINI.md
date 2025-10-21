@@ -1,12 +1,13 @@
-# FlyManager Project Summary
+# MonVolEnLigne Project Summary
 
-This document provides a comprehensive overview of the FlyManager project, a flight booking platform. It is intended to be a guide for developers and contributors.
+This document provides a comprehensive overview of the MonVolEnLigne project, a flight booking platform. It is intended to be a guide for developers and contributors.
 
 ## 1. Project Overview
 
-FlyManager is a complete flight reservation platform built with PHP. It connects clients, travel agencies, and airlines through a centralized system, with a dedicated administration panel for platform management.
+MonVolEnLigne is a complete flight reservation platform built with PHP. It connects clients, travel agencies, and airlines through a centralized system, with a dedicated administration panel for platform management.
 
 The platform supports four main user roles:
+
 - **CLIENT**: Searches for flights and manages their bookings.
 - **AGENCY**: Manages flight bookings on behalf of clients.
 - **AIRLINE**: Manages their fleet, flights, and fares.
@@ -28,8 +29,8 @@ The application follows a custom structure that separates presentation, business
 
 - **/app/**: Contains the frontend views and dashboards for authenticated users. Each user role has its own subdirectory (`/app/admin`, `/app/agency`, etc.).
 - **/src/**: The core of the application's backend logic.
-    - `controllers/`: Handles form submissions, user actions, and business logic.
-    - `functions/`: Contains data access functions (e.g., `client_data.php`, `admin_data.php`) that query the database, and helper functions for validation, authentication, and email.
+  - `controllers/`: Handles form submissions, user actions, and business logic.
+  - `functions/`: Contains data access functions (e.g., `client_data.php`, `admin_data.php`) that query the database, and helper functions for validation, authentication, and email.
 - **/public/**: Contains public-facing pages like the landing page, login/registration forms, and contact page.
 - **/config/**: Holds the database connection settings (`db.php`).
 - **/uploads/**: Intended for storing generated files like PDF tickets and user avatars.
@@ -46,30 +47,34 @@ The database schema is defined in `db.sql`. It is the source of truth for all da
 ## 5. Core Workflows & Features
 
 ### Authentication
+
 - Managed via PHP sessions.
 - Helper functions in `src/functions/auth_helpers.php`.
 - A "first connection" workflow forces users to change their temporary password.
 - Role-based access control is implemented by checking session variables.
 
 ### User Registration
+
 - **Clients** can register directly.
 - **Agencies** and **Airlines** submit partnership requests via forms (`demandes_agences`, `demandes_compagnies`).
 - An **Admin** must approve these requests to create the corresponding user and entity (`agences` or `compagnies_aeriennes`).
 - Email notifications are sent upon approval/rejection.
 
 ### Dashboards by Role
+
 - **ADMIN**: Full oversight of users, flights, bookings, and partnership requests. Features AJAX-powered modals for viewing details without page reloads.
 - **AIRLINE**: Manages fleet (`avions`), creates flights (`vols`), sets fares (`tarifs`), and views bookings on their flights.
 - **AGENCY**: Searches for flights, books for clients, manages client requests, and handles cancellations.
 - **CLIENT**: Searches for flights, manages personal bookings, and can request assistance from an agency.
 
 ### Email Notifications
+
 - Handled by the `sendEmail.php` function using the PHPMailer library.
 - Emails are sent for:
-    - Registration confirmation.
-    - Account activation (with temporary password).
-    - Partnership request approvals/rejections.
-    - Booking confirmations.
+  - Registration confirmation.
+  - Account activation (with temporary password).
+  - Partnership request approvals/rejections.
+  - Booking confirmations.
 
 ## 6. Coding Conventions
 
@@ -91,11 +96,11 @@ All four modules are functionally complete and ready for user testing.
 - **Description**: The final key feature to be implemented is the generation of PDF tickets upon confirmed booking.
 - **Blocker**: The project does not currently use `Composer` for dependency management. A PHP PDF generation library (like `TCPDF` or `FPDF`) needs to be installed via Composer.
 - **Required Steps**:
-    1. Initialize Composer in the project (`composer init`).
-    2. Install a PDF library (`composer require tecnickcom/tcpdf`).
-    3. Implement the PDF generation logic in `src/functions/`.
-    4. Integrate the generation into the booking confirmation controllers.
-    5. Create a secure download controller for the generated tickets.
+  1. Initialize Composer in the project (`composer init`).
+  2. Install a PDF library (`composer require tecnickcom/tcpdf`).
+  3. Implement the PDF generation logic in `src/functions/`.
+  4. Integrate the generation into the booking confirmation controllers.
+  5. Create a secure download controller for the generated tickets.
 
 ### Future Improvements (Backlog)
 

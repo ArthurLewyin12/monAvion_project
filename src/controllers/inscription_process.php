@@ -74,7 +74,7 @@ if ($result['success']) {
     // Envoyer l'email (ne pas bloquer l'inscription si l'email échoue)
     send_welcome_email($email, $prenom, $dashboard_url);
 
-    $_SESSION['success_message'] = "Votre compte a été créé avec succès ! Bienvenue sur MonAvionEnLigne.";
+    $_SESSION['success_message'] = "Votre compte a été créé avec succès ! Bienvenue sur MonVolEnLigne.";
 
     // Rediriger vers le dashboard client
     header('Location: ../../app/client/home.php');

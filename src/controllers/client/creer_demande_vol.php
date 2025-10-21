@@ -191,14 +191,14 @@ try {
 
         <p style='margin-top: 30px;'>
             Cordialement,<br>
-            <strong>L'équipe FlyManager</strong>
+            <strong>L'équipe MonVolEnLigne</strong>
         </p>
     </div>
     ";
 
     sendEmail(
         $client['email'],
-        "Demande de vol envoyée - FlyManager",
+        "Demande de vol envoyée - MonVolEnLigne",
         $email_client_body,
         "Votre demande d'assistance a bien été envoyée."
     );
@@ -238,14 +238,14 @@ try {
 
         <p style='margin-top: 30px;'>
             Cordialement,<br>
-            <strong>L'équipe FlyManager</strong>
+            <strong>L'équipe MonVolEnLigne</strong>
         </p>
     </div>
     ";
 
     sendEmail(
         $agence['agence_email'],
-        "Nouvelle demande de vol - FlyManager",
+        "Nouvelle demande de vol - MonVolEnLigne",
         $email_agence_body,
         "Vous avez reçu une nouvelle demande de vol."
     );

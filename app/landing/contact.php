@@ -1,6 +1,6 @@
 <?php
-$page_title = "Contact - FlyManager";
-require_once __DIR__ . '/../app/landing/layouts/header.php';
+$page_title = "Contact - MonVolEnLigne";
+include 'layouts/header.php';
 ?>
 
 <link rel="stylesheet" href="assets/css/contact.css">
@@ -174,7 +174,7 @@ require_once __DIR__ . '/../app/landing/layouts/header.php';
                         </div>
                         <div class="info-card-content">
                             <h3 class="info-card-title">Email</h3>
-                            <a href="mailto:contact@flymanager.com" class="info-card-link">contact@flymanager.com</a>
+                            <a href="mailto:contact@monVolEnLigne.com" class="info-card-link">contact@monVolEnLigne.com</a>
                             <p class="info-card-subtitle">Réponse sous 24h</p>
                         </div>
                     </div>

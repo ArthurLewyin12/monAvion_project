@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MonAvionEnLigne - Plateforme de Réservation</title>
+    <title>MonVolEnLigne - Plateforme de Réservation</title>
     <link rel="stylesheet" href="../../public/main.css">
     <link rel="stylesheet" href="assets/css/header.css">
     <link rel="stylesheet" href="assets/css/footer.css">
@@ -23,15 +23,15 @@
     <header class="main-header">
         <div class="header-container">
             <div class="logo">
-                <a href="index.php">MonAvionEnLigne</a>
+                <a href="index.php">MonVolEnLigne</a>
             </div>
             <nav class="main-nav">
                 <button class="menu-toggle-button" aria-controls="main-navigation" aria-expanded="false">Menu</button>
                 <ul class="nav-list" id="main-navigation">
                     <li class="nav-item"><a href="index.php" class="nav-link active">Accueil</a></li>
                     <li class="nav-item"><a href="../../public/vols.php" class="nav-link">Rechercher un Vol</a></li>
-                    <li class="nav-item"><a href="../../public/contact.php" class="nav-link">Contact</a></li>
-                    <li class="nav-item"><a href="../auth/connexion.php" class="nav-button">Connexion</a></li>
+                    <li class="nav-item"><a href="contact.php" class="nav-link">Contact</a></li>
+                    <li class="nav-item"><a href="../../app/auth/connexion.php" class="nav-button">Connexion</a></li>
                 </ul>
             </nav>
         </div>

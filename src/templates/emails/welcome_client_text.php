@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Template d'email de bienvenue pour les nouveaux clients (version texte)
  * Variables disponibles: $prenom, $dashboard_url
@@ -6,7 +7,7 @@
 ?>
 Bonjour <?php echo $prenom; ?>,
 
-Nous sommes ravis de vous accueillir sur FlyManager !
+Nous sommes ravis de vous accueillir sur MonVolEnLigne !
 
 Votre compte a été créé avec succès. Vous pouvez maintenant profiter de tous nos services :
 
@@ -21,8 +22,8 @@ Pour commencer, accédez à votre espace personnel :
 
 Si vous avez des questions, n'hésitez pas à nous contacter.
 
-À bientôt sur FlyManager !
-L'équipe FlyManager
+À bientôt sur MonVolEnLigne !
+L'équipe MonVolEnLigne
 
 ---
-© <?php echo date('Y'); ?> FlyManager - Tous droits réservés
+© <?php echo date('Y'); ?> MonVolEnLigne - Tous droits réservés
