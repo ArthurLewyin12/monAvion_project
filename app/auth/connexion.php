@@ -1,3 +1,33 @@
+<?php
+// Démarrer la session
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Si l'utilisateur est déjà connecté, le rediriger vers son dashboard
+if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']) {
+    $user_type = $_SESSION['user_type'] ?? null;
+    switch ($user_type) {
+        case 'ADMIN':
+            header('Location: ../admin/dashboard.php');
+            exit();
+        case 'CLIENT':
+            header('Location: ../client/home.php');
+            exit();
+        case 'AGENCE':
+            header('Location: ../agency/home.php');
+            exit();
+        case 'COMPAGNIE':
+            header('Location: ../compagnie/home.php');
+            exit();
+    }
+}
+
+// Récupérer les erreurs et valeurs précédentes
+$errors = $_SESSION['login_errors'] ?? [];
+$email = $_SESSION['login_email'] ?? '';
+unset($_SESSION['login_errors'], $_SESSION['login_email']);
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
