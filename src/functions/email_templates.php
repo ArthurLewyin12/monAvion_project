@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Fonctions pour gérer les templates d'emails
  */
@@ -11,7 +12,8 @@
  * @param bool $is_text Si true, utilise la version texte du template
  * @return string Le contenu HTML/texte du template rendu
  */
-function render_email_template($template_name, $variables = [], $is_text = false) {
+function render_email_template($template_name, $variables = [], $is_text = false)
+{
     $extension = $is_text ? '_text.php' : '.php';
     $template_path = __DIR__ . '/../templates/emails/' . $template_name . $extension;
 
@@ -40,7 +42,8 @@ function render_email_template($template_name, $variables = [], $is_text = false
  * @param array $variables Variables à passer au template
  * @return bool True si l'email est envoyé, false sinon
  */
-function send_templated_email($to, $subject, $template_name, $variables = []) {
+function send_templated_email($to, $subject, $template_name, $variables = [])
+{
     require_once __DIR__ . '/sendEmail.php';
 
     // Générer le contenu HTML
@@ -65,10 +68,11 @@ function send_templated_email($to, $subject, $template_name, $variables = []) {
  * @param string $dashboard_url URL du dashboard client
  * @return bool
  */
-function send_welcome_email($email, $prenom, $dashboard_url) {
+function send_welcome_email($email, $prenom, $dashboard_url)
+{
     return send_templated_email(
         $email,
-        "Bienvenue sur FlyManager !",
+        "Bienvenue sur MonVolEnLigne !",
         "welcome_client",
         [
             'prenom' => $prenom,
@@ -84,7 +88,8 @@ function send_welcome_email($email, $prenom, $dashboard_url) {
  * @param array $reservation_data Données de la réservation
  * @return bool
  */
-function send_reservation_confirmation_email($email, $reservation_data) {
+function send_reservation_confirmation_email($email, $reservation_data)
+{
     return send_templated_email(
         $email,
         "Confirmation de votre réservation - " . $reservation_data['numero_reservation'],
@@ -101,7 +106,8 @@ function send_reservation_confirmation_email($email, $reservation_data) {
  * @param string $nom Nom de l'entité
  * @return bool
  */
-function send_partnership_request_received_email($email, $type, $nom) {
+function send_partnership_request_received_email($email, $type, $nom)
+{
     return send_templated_email(
         $email,
         "Demande de partenariat reçue",

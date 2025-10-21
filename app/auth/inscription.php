@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscription - FlyManager</title>
-    <link rel="stylesheet" href="/public/main.css">
+    <title>Inscription - MonVolEnLigne</title>
+    <link rel="stylesheet" href="../../public/main.css">
     <link rel="stylesheet" href="assets/css/inscription.css">
 </head>
+
 <body>
     <div class="signup-container">
         <!-- PARTIE GAUCHE : Formulaire -->
@@ -14,7 +16,7 @@
             <!-- Bouton retour -->
             <a href="/app/landing/index.php" class="back-button" title="Retour à l'accueil">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    <path d="M19 12H5M12 19l-7-7 7-7" />
                 </svg>
                 Retour
             </a>
@@ -24,11 +26,11 @@
                 <div class="signup-logo">
                     <div class="signup-logo-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                            <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
+                            <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                            <path d="M2 17l10 5 10-5M2 12l10 5 10-5" />
                         </svg>
                     </div>
-                    <h1 class="signup-logo-text">FlyManager</h1>
+                    <h1 class="signup-logo-text">MonVolEnLigne</h1>
                 </div>
 
                 <!-- En-tête -->
@@ -38,15 +40,15 @@
                 </div>
 
                 <!-- Formulaire -->
-                <form class="signup-form" action="/src/controllers/inscription_process.php" method="POST" id="signupForm">
+                <form class="signup-form" action="../../src/controllers/inscription_process.php" method="POST" id="signupForm">
                     <!-- Champ Prénom -->
                     <div class="form-row">
                         <div class="form-group">
                             <label class="form-label" for="prenom">Prénom</label>
                             <div class="input-wrapper">
                                 <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                                    <circle cx="12" cy="7" r="4"/>
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                                    <circle cx="12" cy="7" r="4" />
                                 </svg>
                                 <input
                                     required
@@ -55,8 +57,7 @@
                                     id="prenom"
                                     name="prenom"
                                     placeholder="Jean"
-                                    autocomplete="given-name"
-                                />
+                                    autocomplete="given-name" />
                             </div>
                         </div>
 
@@ -65,8 +66,8 @@
                             <label class="form-label" for="nom">Nom</label>
                             <div class="input-wrapper">
                                 <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                                    <circle cx="12" cy="7" r="4"/>
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                                    <circle cx="12" cy="7" r="4" />
                                 </svg>
                                 <input
                                     required
@@ -75,8 +76,7 @@
                                     id="nom"
                                     name="nom"
                                     placeholder="Dupont"
-                                    autocomplete="family-name"
-                                />
+                                    autocomplete="family-name" />
                             </div>
                         </div>
                     </div>
@@ -86,8 +86,8 @@
                         <label class="form-label" for="email">Adresse email</label>
                         <div class="input-wrapper">
                             <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                                <polyline points="22,6 12,13 2,6"/>
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                <polyline points="22,6 12,13 2,6" />
                             </svg>
                             <input
                                 required
@@ -96,8 +96,7 @@
                                 id="email"
                                 name="email"
                                 placeholder="votre.email@example.com"
-                                autocomplete="email"
-                            />
+                                autocomplete="email" />
                         </div>
                     </div>
 
@@ -106,7 +105,7 @@
                         <label class="form-label" for="telephone">Téléphone <span class="optional-label">(optionnel)</span></label>
                         <div class="input-wrapper">
                             <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                             </svg>
                             <input
                                 class="form-input"
@@ -114,8 +113,7 @@
                                 id="telephone"
                                 name="telephone"
                                 placeholder="+33 6 12 34 56 78"
-                                autocomplete="tel"
-                            />
+                                autocomplete="tel" />
                         </div>
                     </div>
 
@@ -124,8 +122,8 @@
                         <label class="form-label" for="password">Mot de passe</label>
                         <div class="input-wrapper input-wrapper-password">
                             <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
                             </svg>
                             <input
                                 required
@@ -134,16 +132,15 @@
                                 id="password"
                                 name="password"
                                 placeholder="••••••••"
-                                autocomplete="new-password"
-                            />
+                                autocomplete="new-password" />
                             <button type="button" class="toggle-password" aria-label="Afficher le mot de passe" id="togglePassword">
                                 <svg class="eye-icon eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                                    <circle cx="12" cy="12" r="3"/>
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                    <circle cx="12" cy="12" r="3" />
                                 </svg>
                                 <svg class="eye-icon eye-closed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
-                                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
-                                    <line x1="1" y1="1" x2="23" y2="23"/>
+                                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
+                                    <line x1="1" y1="1" x2="23" y2="23" />
                                 </svg>
                             </button>
                         </div>
@@ -160,8 +157,8 @@
                         <label class="form-label" for="password_confirm">Confirmer le mot de passe</label>
                         <div class="input-wrapper input-wrapper-password">
                             <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
                             </svg>
                             <input
                                 required
@@ -170,16 +167,15 @@
                                 id="password_confirm"
                                 name="password_confirm"
                                 placeholder="••••••••"
-                                autocomplete="new-password"
-                            />
+                                autocomplete="new-password" />
                             <button type="button" class="toggle-password" aria-label="Afficher le mot de passe" id="togglePasswordConfirm">
                                 <svg class="eye-icon eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                                    <circle cx="12" cy="12" r="3"/>
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                    <circle cx="12" cy="12" r="3" />
                                 </svg>
                                 <svg class="eye-icon eye-closed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
-                                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
-                                    <line x1="1" y1="1" x2="23" y2="23"/>
+                                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
+                                    <line x1="1" y1="1" x2="23" y2="23" />
                                 </svg>
                             </button>
                         </div>
@@ -207,13 +203,13 @@
                     <button type="submit" class="signup-button">
                         <span class="signup-button-text">Créer mon compte</span>
                         <svg class="signup-button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                            <path d="M5 12h14M12 5l7 7-7 7" />
                         </svg>
                     </button>
 
                     <!-- Pied du formulaire -->
                     <div class="signup-footer">
-                        <p>Vous avez déjà un compte ? <a href="/app/auth/connexion.php" class="login-link">Se connecter</a></p>
+                        <p>Vous avez déjà un compte ? <a href="connexion.php" class="login-link">Se connecter</a></p>
                     </div>
                 </form>
             </div>
@@ -238,7 +234,7 @@
                         <div class="visual-feature">
                             <div class="visual-feature-icon">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="20 6 9 17 4 12"/>
+                                    <polyline points="20 6 9 17 4 12" />
                                 </svg>
                             </div>
                             <div class="visual-feature-text">
@@ -249,7 +245,7 @@
                         <div class="visual-feature">
                             <div class="visual-feature-icon">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="20 6 9 17 4 12"/>
+                                    <polyline points="20 6 9 17 4 12" />
                                 </svg>
                             </div>
                             <div class="visual-feature-text">
@@ -260,7 +256,7 @@
                         <div class="visual-feature">
                             <div class="visual-feature-icon">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="20 6 9 17 4 12"/>
+                                    <polyline points="20 6 9 17 4 12" />
                                 </svg>
                             </div>
                             <div class="visual-feature-text">
@@ -271,7 +267,7 @@
                         <div class="visual-feature">
                             <div class="visual-feature-icon">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="20 6 9 17 4 12"/>
+                                    <polyline points="20 6 9 17 4 12" />
                                 </svg>
                             </div>
                             <div class="visual-feature-text">
@@ -301,30 +297,30 @@
                 <div class="visual-illustration">
                     <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <!-- Mappemonde stylisée -->
-                        <circle cx="200" cy="150" r="100" stroke="var(--color-accent-300)" stroke-width="2" opacity="0.3"/>
-                        <ellipse cx="200" cy="150" rx="100" ry="40" stroke="var(--color-accent-300)" stroke-width="2" opacity="0.3"/>
-                        <path d="M200 50 L200 250" stroke="var(--color-accent-300)" stroke-width="2" opacity="0.3"/>
+                        <circle cx="200" cy="150" r="100" stroke="var(--color-accent-300)" stroke-width="2" opacity="0.3" />
+                        <ellipse cx="200" cy="150" rx="100" ry="40" stroke="var(--color-accent-300)" stroke-width="2" opacity="0.3" />
+                        <path d="M200 50 L200 250" stroke="var(--color-accent-300)" stroke-width="2" opacity="0.3" />
 
                         <!-- Avions qui tournent -->
                         <g class="plane-orbit plane-orbit-1">
-                            <circle cx="280" cy="100" r="15" fill="var(--color-secondary-400)" opacity="0.9"/>
-                            <path d="M275 100 L265 105 L275 103 Z" fill="var(--color-accent-300)"/>
+                            <circle cx="280" cy="100" r="15" fill="var(--color-secondary-400)" opacity="0.9" />
+                            <path d="M275 100 L265 105 L275 103 Z" fill="var(--color-accent-300)" />
                         </g>
 
                         <g class="plane-orbit plane-orbit-2">
-                            <circle cx="120" cy="180" r="12" fill="var(--color-accent-400)" opacity="0.9"/>
-                            <path d="M115 180 L108 183 L115 181 Z" fill="var(--color-secondary-300)"/>
+                            <circle cx="120" cy="180" r="12" fill="var(--color-accent-400)" opacity="0.9" />
+                            <path d="M115 180 L108 183 L115 181 Z" fill="var(--color-secondary-300)" />
                         </g>
 
                         <!-- Points de destination -->
                         <circle cx="150" cy="120" r="5" fill="var(--color-secondary-400)">
-                            <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/>
+                            <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite" />
                         </circle>
                         <circle cx="250" cy="170" r="5" fill="var(--color-accent-400)">
-                            <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" begin="0.5s" repeatCount="indefinite"/>
+                            <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" begin="0.5s" repeatCount="indefinite" />
                         </circle>
                         <circle cx="220" cy="130" r="5" fill="var(--color-secondary-300)">
-                            <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" begin="1s" repeatCount="indefinite"/>
+                            <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" begin="1s" repeatCount="indefinite" />
                         </circle>
                     </svg>
                 </div>
@@ -332,6 +328,7 @@
         </div>
     </div>
 
-    <script src="/public/assets/js/inscription-form.js"></script>
+    <script src="../../public/assets/js/inscription-form.js"></script>
 </body>
+
 </html>

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Template d'email de bienvenue pour les nouveaux clients
  * Variables disponibles: $prenom, $dashboard_url
@@ -6,6 +7,7 @@
 ?>
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,11 +24,13 @@
             padding: 0;
             background-color: #f5f5f5;
         }
+
         .container {
             max-width: 600px;
             margin: 0 auto;
             padding: 20px;
         }
+
         .header {
             background: linear-gradient(135deg, #1e3a8a 0%, #06b6d4 100%);
             color: #ffffff;
@@ -34,37 +38,44 @@
             text-align: center;
             border-radius: 10px 10px 0 0;
         }
+
         .header h1 {
             margin: 0;
             font-size: 28px;
             color: #ffffff;
         }
+
         .content {
             background: #ffffff;
             padding: 30px;
             border-radius: 0 0 10px 10px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+
         .content p {
             line-height: 1.6;
             margin: 15px 0;
             color: #333333;
         }
+
         .content ul {
             background: #fafafa;
             padding: 20px 20px 20px 40px;
             border-left: 4px solid #1e3a8a;
             border-radius: 5px;
         }
+
         .content ul li {
             margin: 10px 0;
             line-height: 1.5;
             color: #333333;
         }
+
         .button-container {
             text-align: center;
             margin: 30px 0;
         }
+
         .button {
             display: inline-block;
             background: #1e3a8a;
@@ -75,9 +86,11 @@
             font-weight: bold;
             font-size: 16px;
         }
+
         .button:hover {
             background: #1e40af;
         }
+
         .footer {
             text-align: center;
             color: #999999;
@@ -85,21 +98,23 @@
             margin-top: 30px;
             padding: 20px;
         }
+
         .footer a {
             color: #1e3a8a;
             text-decoration: none;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="header">
-            <h1>🎉 Bienvenue sur FlyManager !</h1>
+            <h1>🎉 Bienvenue sur MonVolEnLigne !</h1>
         </div>
         <div class="content">
             <p>Bonjour <strong><?php echo htmlspecialchars(
-                $prenom,
-            ); ?></strong>,</p>
+                                    $prenom,
+                                ); ?></strong>,</p>
 
             <p>Nous sommes ravis de vous accueillir parmi nos utilisateurs !</p>
 
@@ -116,8 +131,8 @@
 
             <div class="button-container">
                 <a href="<?php echo htmlspecialchars(
-                    $dashboard_url,
-                ); ?>" class="button">
+                                $dashboard_url,
+                            ); ?>" class="button">
                     Accéder à mon espace
                 </a>
             </div>
@@ -128,12 +143,12 @@
             </p>
 
             <p style="margin-top: 20px;">
-                À bientôt sur FlyManager !<br>
-                <strong>L'équipe FlyManager</strong>
+                À bientôt sur MonVolEnLigne !<br>
+                <strong>L'équipe MonVolEnLigne</strong>
             </p>
         </div>
         <div class="footer">
-            <p>© <?php echo date("Y"); ?> FlyManager - Tous droits réservés</p>
+            <p>© <?php echo date("Y"); ?> MonVolEnLigne - Tous droits réservés</p>
             <p>
                 <a href="#">Politique de confidentialité</a> •
                 <a href="#">Conditions d'utilisation</a>
@@ -141,4 +156,5 @@
         </div>
     </div>
 </body>
+
 </html>

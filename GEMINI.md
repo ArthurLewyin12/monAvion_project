@@ -1,86 +1,110 @@
-# Gemini Project Summary
+# MonVolEnLigne Project Summary
 
-This file summarizes the actions taken by the Gemini agent.
+This document provides a comprehensive overview of the MonVolEnLigne project, a flight booking platform. It is intended to be a guide for developers and contributors.
 
-## Project Setup
+## 1. Project Overview
 
-- The project structure has been created according to `tree.md`.
-- The following directories have been created: `public`, `src`, `src/controllers`, `src/models`, `src/views`, `config`.
-- The following files have been created:
-  - `public/index.php`
-  - `public/.htaccess`
-  - `config/db.php`
-  - `public/inscription.php`
-  - `public/client`
-  - `public/agency`
-  - `public/airline`
-  - `public/request`
-  - `public/connexion.php`
-  - `src/controllers/airline_registration_process.php`
-  - `src/controllers/agency_registration_process.php`
+MonVolEnLigne is a complete flight reservation platform built with PHP. It connects clients, travel agencies, and airlines through a centralized system, with a dedicated administration panel for platform management.
 
-## Authentication
+The platform supports four main user roles:
 
-- `Auth.php` has been moved to `src/controllers/Auth.php`.
-- `db.sample.php` has been moved to `config/db.php`.
-- Client registration and login have been implemented in `public/inscription.php` and `public/connexion.php`.
-- Placeholder files for airline and agency registration have been created.
-- Voici comment j'enregistre mes sessions:
+- **CLIENT**: Searches for flights and manages their bookings.
+- **AGENCY**: Manages flight bookings on behalf of clients.
+- **AIRLINE**: Manages their fleet, flights, and fares.
+- **ADMIN**: Oversees the entire platform, including user management, approvals, and content.
 
-```php
-$_SESSION["user"] // sachant que user est un tableau, tu peux check @db.sql pour avoir le nom des colonnes
-```
+The project is approximately 97% complete, with all core modules being fully functional.
 
-## Agency and Airline Registration
+## 2. Technical Stack
 
-- Implemented the registration process for agencies and airlines.
-- Created `agences/inscription.php` and `compagnies/inscription.php` with the necessary forms.
-- Created `src/controllers/agency_registration_process.php` and `src/controllers/airline_registration_process.php` to handle form submissions.
-- New users are created with an 'INACTIVE' status and a temporary password.
-- Added `validate_agency_inscription_data` and `validate_airline_inscription_data` to `src/functions/validation.php`.
-- Implemented an admin dashboard to view all users and a user details page to activate or suspend users.
+- **Backend**: PHP 8.x (procedural and functional style)
+- **Database**: MySQL / MariaDB (schema is in `db.sql`)
+- **Database Access**: PDO for secure database interactions.
+- **Frontend**: HTML5, CSS3 (using modern OKLCH colors), and Vanilla JavaScript.
+- **Emailing**: `PHPMailer` library (located in `src/PHPMailer-master`) for transactional emails.
 
-## Data Implementation & Database
+## 3. Project Structure
 
-- The `db.sql` file contains the full database schema. This file should be considered the source of truth for all data structures and relationships when implementing features that interact with the database.
-- The admin dashboard has been enhanced with data visualizations as specified in `dashboard-data-proposals.md`. The queries have been verified against `db.sql`.
+The application follows a custom structure that separates presentation, business logic, and configuration.
 
-## Dashboards
+- **/app/**: Contains the frontend views and dashboards for authenticated users. Each user role has its own subdirectory (`/app/admin`, `/app/agency`, etc.).
+- **/src/**: The core of the application's backend logic.
+  - `controllers/`: Handles form submissions, user actions, and business logic.
+  - `functions/`: Contains data access functions (e.g., `client_data.php`, `admin_data.php`) that query the database, and helper functions for validation, authentication, and email.
+- **/public/**: Contains public-facing pages like the landing page, login/registration forms, and contact page.
+- **/config/**: Holds the database connection settings (`db.php`).
+- **/uploads/**: Intended for storing generated files like PDF tickets and user avatars.
+- **db.sql**: The definitive database schema. **All table and column names are in French.**
 
-- Implemented dashboards for all user roles: `ADMIN`, `AGENCY`, `AIRLINE`, and `CLIENT`.
-- Each dashboard is built with a reusable sidebar and body structure.
-- The data displayed on each dashboard is dynamically loaded based on the user's role and is aligned with the proposals in `dashboard-data-proposals.md`.
+## 4. Database
 
-### Architecture des Dashboards
+The database schema is defined in `db.sql`. It is the source of truth for all data structures.
 
-Pour standardiser et sécuriser les tableaux de bord, une architecture unifiée a été mise en place :
+- **Naming Convention**: All tables, columns, and ENUM values are in French (e.g., `utilisateurs`, `vols`, `reservations`, `statut_actuel`).
+- **Relationships**: The schema is relational with foreign keys enforcing data integrity.
+- **Auditing**: Tables include tracking fields like `cree_par`, `modifie_par`, and `date_creation`.
 
-1.  **Point d'Entrée Unique** : Chaque rôle (`ADMIN`, `AGENCY`, etc.) possède un unique point d'entrée : `index.php` (par exemple, `/public/airline/index.php`). C'est le seul fichier à appeler directement.
+## 5. Core Workflows & Features
 
-2.  **Authentification Centralisée** : Ce fichier `index.php` est responsable de la vérification de la session et du rôle de l'utilisateur. Si l'utilisateur n'est pas authentifié ou n'a pas le bon rôle, il est redirigé vers la page de connexion. Aucune autre page du dashboard ne doit répéter cette vérification.
+### Authentication
 
-3.  **Chargement des Données** : Le fichier `index.php` inclut ensuite le script `dashboard_data.php` correspondant pour charger toutes les données nécessaires pour ce rôle.
+- Managed via PHP sessions.
+- Helper functions in `src/functions/auth_helpers.php`.
+- A "first connection" workflow forces users to change their temporary password.
+- Role-based access control is implemented by checking session variables.
 
-4.  **Structure Modulaire** : Le `index.php` inclut ensuite les deux parties principales de la vue :
+### User Registration
 
-    - `src/views/partials/sidebar.php` : La barre de navigation latérale. Elle génère les liens de la forme `index.php?page=nom_de_la_page`.
-    - `src/views/partials/body.php` : Le conteneur principal qui, en fonction du paramètre d'URL `?page=...`, inclut le fichier de contenu correspondant (ex: `my_flights.php`, `fares.php`).
+- **Clients** can register directly.
+- **Agencies** and **Airlines** submit partnership requests via forms (`demandes_agences`, `demandes_compagnies`).
+- An **Admin** must approve these requests to create the corresponding user and entity (`agences` or `compagnies_aeriennes`).
+- Email notifications are sent upon approval/rejection.
 
-5.  **Pages de Contenu** : Les fichiers comme `my_flights.php`, `add_aircraft.php`, etc., ne contiennent que le code HTML et PHP de leur contenu spécifique. Ils n'ont plus de balises `<html>`, `<head>`, `<body>` ni de vérification de session.
+### Dashboards by Role
 
-Cette approche garantit que la sécurité est gérée en un seul point et que les pages sont légères et réutilisables.
+- **ADMIN**: Full oversight of users, flights, bookings, and partnership requests. Features AJAX-powered modals for viewing details without page reloads.
+- **AIRLINE**: Manages fleet (`avions`), creates flights (`vols`), sets fares (`tarifs`), and views bookings on their flights.
+- **AGENCY**: Searches for flights, books for clients, manages client requests, and handles cancellations.
+- **CLIENT**: Searches for flights, manages personal bookings, and can request assistance from an agency.
 
-## Email Notifications
+### Email Notifications
 
-- Implemented email notifications for the following events:
-  - **Agency/Airline Registration:** When an agency or airline submits their registration, they receive a confirmation email.
-  - **User Activation:** When an administrator activates a user's account, the user receives an email containing their login credentials (email and a temporary password).
-  - `@src/functions/sendEmail.php` for send emails
+- Handled by the `sendEmail.php` function using the PHPMailer library.
+- Emails are sent for:
+  - Registration confirmation.
+  - Account activation (with temporary password).
+  - Partnership request approvals/rejections.
+  - Booking confirmations.
 
-## STACK BACKEND
+## 6. Coding Conventions
 
-concernant les outils que j'utilise jai `@src/functions/sendEmail.php` de `@src/PHPMailer-master` pour l'envoi d'email, sinon j'utilise à 90% php pour la logique backend, pour le html, pose des bases simple pour tester le backend
+- **File Naming**: `kebab-case.php` (e.g., `mes-reservations.php`).
+- **PHP Functions**: `snake_case()` (e.g., `get_client_stats()`).
+- **PHP Variables**: `$snake_case` (e.g., `$user_id`).
+- **CSS Classes**: `kebab-case` (e.g., `.vol-card`).
+- **Database**: All names are in French and `snake_case`.
 
-## Next Steps
+## 7. Current Status & Next Steps
 
-- Secure the application and add more features as needed.
+### Project Status: 🟢 Near Completion
+
+All four modules are functionally complete and ready for user testing.
+
+### ❗️ Blocked Task: PDF Ticket Generation
+
+- **Priority**: CRITICAL
+- **Description**: The final key feature to be implemented is the generation of PDF tickets upon confirmed booking.
+- **Blocker**: The project does not currently use `Composer` for dependency management. A PHP PDF generation library (like `TCPDF` or `FPDF`) needs to be installed via Composer.
+- **Required Steps**:
+  1. Initialize Composer in the project (`composer init`).
+  2. Install a PDF library (`composer require tecnickcom/tcpdf`).
+  3. Implement the PDF generation logic in `src/functions/`.
+  4. Integrate the generation into the booking confirmation controllers.
+  5. Create a secure download controller for the generated tickets.
+
+### Future Improvements (Backlog)
+
+- Implement HTML templates for more professional-looking emails.
+- Add advanced statistical charts to dashboards (e.g., using Chart.js).
+- Develop an audit trail for sensitive actions.
+- Allow clients to cancel their own bookings (with conditions).

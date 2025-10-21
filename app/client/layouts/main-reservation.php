@@ -33,7 +33,7 @@
         </div>
     <?php endif; ?>
 
-    <form method="POST" action="/src/controllers/reservation_process.php" id="reservationForm">
+    <form method="POST" action="../../src/controllers/reservation_process.php" id="reservationForm">
         <input type="hidden" name="vol_id" value="<?= $vol['id'] ?>">
         <input type="hidden" name="classe" value="<?= htmlspecialchars($classe_selectionnee) ?>">
 
@@ -55,8 +55,7 @@
                                     value="<?= $siege['id'] ?>"
                                     required
                                     style="display: none;"
-                                    onchange="this.parentElement.classList.add('selected'); document.querySelectorAll('.siege-btn').forEach(el => { if(el !== this.parentElement) el.classList.remove('selected'); });"
-                                >
+                                    onchange="this.parentElement.classList.add('selected'); document.querySelectorAll('.siege-btn').forEach(el => { if(el !== this.parentElement) el.classList.remove('selected'); });">
                                 <?= htmlspecialchars($siege['numero_siege']) ?>
                             </label>
                         <?php endforeach; ?>
@@ -152,12 +151,12 @@
 </div>
 
 <script>
-document.getElementById('reservationForm').addEventListener('submit', function(e) {
-    const siegeSelected = document.querySelector('input[name="siege_id"]:checked');
-    if (!siegeSelected) {
-        e.preventDefault();
-        alert('Veuillez sélectionner un siège avant de continuer.');
-        return false;
-    }
-});
+    document.getElementById('reservationForm').addEventListener('submit', function(e) {
+        const siegeSelected = document.querySelector('input[name="siege_id"]:checked');
+        if (!siegeSelected) {
+            e.preventDefault();
+            alert('Veuillez sélectionner un siège avant de continuer.');
+            return false;
+        }
+    });
 </script>
