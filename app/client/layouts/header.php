@@ -1,11 +1,14 @@
 <?php
+// Inclure la configuration
+require_once __DIR__ . '/../../../config/config.php';
+
 // Vérifier que l'utilisateur est connecté et est un CLIENT
 if (
     !isset($_SESSION["logged_in"]) ||
     !$_SESSION["logged_in"] ||
     $_SESSION["user_type"] !== "CLIENT"
 ) {
-    header("Location:../../auth/connexion.php");
+    header("Location:" . url('app/auth/connexion.php'));
     exit();
 }
 
@@ -21,10 +24,10 @@ $current_page = basename($_SERVER["PHP_SELF"], ".php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MonVolEnLigne - Espace Client</title>
-    <link rel="stylesheet" href="../../public/main.css">
+    <link rel="stylesheet" href="<?= asset('main.css') ?>">
     <link rel="stylesheet" href="../landing/assets/css/header.css">
     <link rel="stylesheet" href="../landing/assets/css/footer.css">
-    <link rel="stylesheet" href="../../public/assets/css/animations.css">
+    <link rel="stylesheet" href="<?= asset('assets/css/animations.css') ?>">
     <link rel="stylesheet" href="assets/css/base.css">
 </head>
 
@@ -32,7 +35,7 @@ $current_page = basename($_SERVER["PHP_SELF"], ".php");
     <header class="main-header">
         <div class="header-container">
             <div class="logo">
-                <a href="/app/client/home.php">MonVolEnLigne</a>
+                <a href="<?= url('app/landing/index.php') ?>">MonVolEnLigne</a>
             </div>
             <nav class="main-nav">
                 <button class="menu-toggle-button" aria-controls="main-navigation" aria-expanded="false">Menu</button>
@@ -70,7 +73,7 @@ $current_page = basename($_SERVER["PHP_SELF"], ".php");
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="../../src/controllers/logout.php" class="nav-button">
+                        <a href="<?= url('src/controllers/logout.php') ?>" class="nav-button">
                             Déconnexion
                         </a>
                     </li>

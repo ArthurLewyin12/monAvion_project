@@ -1,4 +1,7 @@
 <?php
+// Inclure la configuration
+require_once __DIR__ . '/../../../config/config.php';
+
 // Démarrer la session si elle n'est pas déjà démarrée
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -15,19 +18,19 @@ $dashboard_text = 'Mon Espace';
 if ($is_logged_in) {
     switch ($user_type) {
         case 'ADMIN':
-            $dashboard_link = '../../app/admin/dashboard.php';
+            $dashboard_link = url('app/admin/dashboard.php');
             $dashboard_text = 'Admin';
             break;
         case 'CLIENT':
-            $dashboard_link = '../../app/client/home.php';
+            $dashboard_link = url('app/client/home.php');
             $dashboard_text = 'Mon Espace';
             break;
         case 'AGENCE':
-            $dashboard_link = '../../app/agency/home.php';
+            $dashboard_link = url('app/agency/home.php');
             $dashboard_text = 'Mon Agence';
             break;
         case 'COMPAGNIE':
-            $dashboard_link = '../../app/compagnie/home.php';
+            $dashboard_link = url('app/compagnie/home.php');
             $dashboard_text = 'Ma Compagnie';
             break;
     }
@@ -40,10 +43,10 @@ if ($is_logged_in) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MonVolEnLigne - Plateforme de Réservation</title>
-    <link rel="stylesheet" href="../../public/main.css">
+    <link rel="stylesheet" href="<?= asset('main.css') ?>">
     <link rel="stylesheet" href="assets/css/header.css">
     <link rel="stylesheet" href="assets/css/footer.css">
-    <link rel="stylesheet" href="../../public/assets/css/animations.css">
+    <link rel="stylesheet" href="<?= asset('assets/css/animations.css') ?>">
 
     <!-- Styles des composants -->
     <link rel="stylesheet" href="assets/css/hero-section.css">
@@ -68,9 +71,9 @@ if ($is_logged_in) {
                     <li class="nav-item"><a href="contact.php" class="nav-link">Contact</a></li>
                     <?php if ($is_logged_in): ?>
                         <li class="nav-item"><a href="<?= htmlspecialchars($dashboard_link) ?>" class="nav-button"><?= htmlspecialchars($dashboard_text) ?></a></li>
-                        <li class="nav-item"><a href="../../src/controllers/logout.php" class="nav-link">Déconnexion</a></li>
+                        <li class="nav-item"><a href="<?= url('src/controllers/logout.php') ?>" class="nav-link">Déconnexion</a></li>
                     <?php else: ?>
-                        <li class="nav-item"><a href="../../app/auth/connexion.php" class="nav-button">Connexion</a></li>
+                        <li class="nav-item"><a href="<?= url('app/auth/connexion.php') ?>" class="nav-button">Connexion</a></li>
                     <?php endif; ?>
                 </ul>
             </nav>

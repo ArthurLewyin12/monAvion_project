@@ -5,9 +5,12 @@
  * Variables attendues: $page_title, $breadcrumb (optionnel)
  */
 
+// Inclure la configuration
+require_once __DIR__ . '/../../../config/config.php';
+
 // Vérifier l'authentification
 if (!isset($_SESSION['logged_in']) || !$_SESSION['logged_in'] || $_SESSION['user_type'] !== 'ADMIN') {
-    header("Location: /app/auth/connexion.php");
+    header("Location: " . url('app/auth/connexion.php'));
     exit();
 }
 
@@ -21,7 +24,7 @@ $user_nom = $_SESSION['user_nom'] ?? '';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= htmlspecialchars($page_title ?? 'Admin') ?> - MonVolEnLigne</title>
-    <link rel="stylesheet" href="/public/main.css">
+    <link rel="stylesheet" href="<?= asset('main.css') ?>">
     <link rel="stylesheet" href="assets/css/base.css">
 </head>
 
@@ -77,7 +80,7 @@ $user_nom = $_SESSION['user_nom'] ?? '';
                             </svg>
                         </button>
                         <div class="dropdown-menu">
-                            <a href="/src/controllers/logout.php" class="dropdown-item">
+                            <a href="<?= url('src/controllers/logout.php') ?>" class="dropdown-item">
                                 <svg class="dropdown-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M9 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                     <path d="M16 17L21 12L16 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />

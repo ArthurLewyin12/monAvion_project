@@ -1,9 +1,10 @@
 <?php
+require_once __DIR__ . '/../../config/config.php';
 session_start();
 
 // Si déjà connecté en tant que compagnie, rediriger
 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] && $_SESSION['user_type'] === 'COMPAGNIE') {
-    header("Location: /app/compagnie/dashboard.php");
+    header("Location: " . url('app/compagnie/dashboard.php'));
     exit();
 }
 
@@ -17,7 +18,7 @@ unset($_SESSION['error_message']);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion Compagnie - MonVolEnLigne</title>
-    <link rel="stylesheet" href="/public/main.css">
+    <link rel="stylesheet" href="<?= asset('main.css') ?>">
     <link rel="stylesheet" href="assets/css/auth.css">
 </head>
 
@@ -79,7 +80,7 @@ unset($_SESSION['error_message']);
                         <path d="M12 16V12M12 8H12.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                     </svg>
                     Cet espace est réservé aux compagnies aériennes partenaires. Si vous êtes un client,
-                    <a href="/app/auth/connexion.php" class="auth-link">connectez-vous ici</a>.
+                    <a href="<?= url('app/auth/connexion.php') ?>" class="auth-link">connectez-vous ici</a>.
                 </p>
             </div>
         </div>

@@ -12,10 +12,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        /* Couleurs converties depuis OKLCH pour compatibilité email */
-        /* Primary (Bleu royal): oklch(0.35 0.15 250) → #1e3a8a */
-        /* Secondary (Orange): oklch(0.70 0.22 45) → #f97316 */
-        /* Accent (Turquoise): oklch(0.65 0.15 195) → #06b6d4 */
+       
 
         body {
             font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;

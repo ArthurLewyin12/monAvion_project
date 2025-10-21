@@ -1,4 +1,7 @@
 <?php
+// Inclure la configuration
+require_once __DIR__ . '/../../config/config.php';
+
 // Démarrer la session
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -9,16 +12,16 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']) {
     $user_type = $_SESSION['user_type'] ?? null;
     switch ($user_type) {
         case 'ADMIN':
-            header('Location: ../admin/dashboard.php');
+            header('Location: ' . url('app/admin/dashboard.php'));
             exit();
         case 'CLIENT':
-            header('Location: ../client/home.php');
+            header('Location: ' . url('app/client/home.php'));
             exit();
         case 'AGENCE':
-            header('Location: ../agency/home.php');
+            header('Location: ' . url('app/agency/home.php'));
             exit();
         case 'COMPAGNIE':
-            header('Location: ../compagnie/home.php');
+            header('Location: ' . url('app/compagnie/home.php'));
             exit();
     }
 }
@@ -35,7 +38,7 @@ unset($_SESSION['login_errors'], $_SESSION['login_email']);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion - MonVolEnLigne</title>
-    <link rel="stylesheet" href="../../public/main.css">
+    <link rel="stylesheet" href="<?= asset('main.css') ?>">
     <link rel="stylesheet" href="assets/css/connection.css">
 </head>
 
@@ -69,8 +72,26 @@ unset($_SESSION['login_errors'], $_SESSION['login_email']);
                     <p class="login-subtitle">Connectez-vous à votre espace professionnel</p>
                 </div>
 
+                <!-- Messages d'erreur -->
+                <?php if (!empty($errors)): ?>
+                    <div class="alert alert-error" style="margin-bottom: 1.5rem; padding: 1rem; background: #fee; border-left: 4px solid #dc2626; border-radius: 0.5rem;">
+                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                            <svg style="width: 20px; height: 20px; color: #dc2626; flex-shrink: 0;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="12" y1="8" x2="12" y2="12"/>
+                                <line x1="12" y1="16" x2="12.01" y2="16"/>
+                            </svg>
+                            <div>
+                                <?php foreach ($errors as $error): ?>
+                                    <p style="margin: 0; color: #dc2626; font-size: 0.95rem;"><?= htmlspecialchars($error) ?></p>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif; ?>
+
                 <!-- Formulaire -->
-                <form class="login-form" action="../../src/controllers/connexion_process.php" method="POST" id="loginForm">
+                <form class="login-form" action="<?= url('src/controllers/connexion_process.php') ?>" method="POST" id="loginForm" novalidate>
                     <!-- Champ Email -->
                     <div class="form-group">
                         <label class="form-label" for="email">Adresse email</label>
@@ -85,9 +106,11 @@ unset($_SESSION['login_errors'], $_SESSION['login_email']);
                                 type="email"
                                 id="email"
                                 name="email"
+                                value="<?= htmlspecialchars($email) ?>"
                                 placeholder="votre.email@example.com"
                                 autocomplete="email" />
                         </div>
+                        <span class="field-error" id="email-error" style="display: none; color: #dc2626; font-size: 0.875rem; margin-top: 0.25rem;"></span>
                     </div>
 
                     <!-- Champ Mot de passe -->
@@ -117,6 +140,7 @@ unset($_SESSION['login_errors'], $_SESSION['login_email']);
                                 </svg>
                             </button>
                         </div>
+                        <span class="field-error" id="password-error" style="display: none; color: #dc2626; font-size: 0.875rem; margin-top: 0.25rem;"></span>
                     </div>
 
                     <!-- Options -->
@@ -129,10 +153,14 @@ unset($_SESSION['login_errors'], $_SESSION['login_email']);
                     </div>
 
                     <!-- Bouton de connexion -->
-                    <button type="submit" class="login-button">
-                        <span class="login-button-text">Se connecter</span>
-                        <svg class="login-button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <button type="submit" class="login-button" id="submitBtn">
+                        <span class="login-button-text" id="btnText">Se connecter</span>
+                        <svg class="login-button-icon" id="btnIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                        <svg class="login-button-loader" id="btnLoader" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none; animation: spin 1s linear infinite;">
+                            <circle cx="12" cy="12" r="10" stroke-opacity="0.25"/>
+                            <path d="M12 2a10 10 0 0 1 10 10" stroke-opacity="0.75"/>
                         </svg>
                     </button>
 
@@ -238,7 +266,150 @@ unset($_SESSION['login_errors'], $_SESSION['login_email']);
         </div>
     </div>
 
-    <script src="/public/assets/js/login-form.js"></script>
+    <script src="<?= asset('assets/js/login-form.js') ?>"></script>
+
+    <style>
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .input-wrapper.error .form-input {
+            border-color: #dc2626 !important;
+        }
+        .field-error {
+            display: block !important;
+        }
+    </style>
+
+    <script>
+        // Validation en temps réel
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const emailError = document.getElementById('email-error');
+        const passwordError = document.getElementById('password-error');
+        const form = document.getElementById('loginForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = document.getElementById('btnText');
+        const btnIcon = document.getElementById('btnIcon');
+        const btnLoader = document.getElementById('btnLoader');
+
+        // Validation email
+        emailInput.addEventListener('blur', function() {
+            const email = this.value.trim();
+            const emailWrapper = this.closest('.input-wrapper');
+
+            if (!email) {
+                emailError.textContent = 'L\'email est requis';
+                emailError.style.display = 'block';
+                emailWrapper.classList.add('error');
+            } else if (!isValidEmail(email)) {
+                emailError.textContent = 'Veuillez entrer une adresse email valide';
+                emailError.style.display = 'block';
+                emailWrapper.classList.add('error');
+            } else {
+                emailError.style.display = 'none';
+                emailWrapper.classList.remove('error');
+            }
+        });
+
+        emailInput.addEventListener('input', function() {
+            if (emailError.style.display === 'block') {
+                const email = this.value.trim();
+                const emailWrapper = this.closest('.input-wrapper');
+                if (email && isValidEmail(email)) {
+                    emailError.style.display = 'none';
+                    emailWrapper.classList.remove('error');
+                }
+            }
+        });
+
+        // Validation mot de passe
+        passwordInput.addEventListener('blur', function() {
+            const password = this.value;
+            const passwordWrapper = this.closest('.input-wrapper');
+
+            if (!password) {
+                passwordError.textContent = 'Le mot de passe est requis';
+                passwordError.style.display = 'block';
+                passwordWrapper.classList.add('error');
+            } else if (password.length < 6) {
+                passwordError.textContent = 'Le mot de passe doit contenir au moins 6 caractères';
+                passwordError.style.display = 'block';
+                passwordWrapper.classList.add('error');
+            } else {
+                passwordError.style.display = 'none';
+                passwordWrapper.classList.remove('error');
+            }
+        });
+
+        passwordInput.addEventListener('input', function() {
+            if (passwordError.style.display === 'block') {
+                const password = this.value;
+                const passwordWrapper = this.closest('.input-wrapper');
+                if (password && password.length >= 6) {
+                    passwordError.style.display = 'none';
+                    passwordWrapper.classList.remove('error');
+                }
+            }
+        });
+
+        // Fonction de validation email
+        function isValidEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        // Soumission du formulaire avec loader
+        form.addEventListener('submit', function(e) {
+            const email = emailInput.value.trim();
+            const password = passwordInput.value;
+            let hasError = false;
+
+            // Validation finale avant soumission
+            if (!email) {
+                emailError.textContent = 'L\'email est requis';
+                emailError.style.display = 'block';
+                emailInput.closest('.input-wrapper').classList.add('error');
+                hasError = true;
+            } else if (!isValidEmail(email)) {
+                emailError.textContent = 'Veuillez entrer une adresse email valide';
+                emailError.style.display = 'block';
+                emailInput.closest('.input-wrapper').classList.add('error');
+                hasError = true;
+            }
+
+            if (!password) {
+                passwordError.textContent = 'Le mot de passe est requis';
+                passwordError.style.display = 'block';
+                passwordInput.closest('.input-wrapper').classList.add('error');
+                hasError = true;
+            } else if (password.length < 6) {
+                passwordError.textContent = 'Le mot de passe doit contenir au moins 6 caractères';
+                passwordError.style.display = 'block';
+                passwordInput.closest('.input-wrapper').classList.add('error');
+                hasError = true;
+            }
+
+            if (hasError) {
+                e.preventDefault();
+                return false;
+            }
+
+            // Afficher le loader et désactiver les champs
+            submitBtn.disabled = true;
+            emailInput.disabled = true;
+            passwordInput.disabled = true;
+            btnText.textContent = 'Connexion en cours...';
+            btnIcon.style.display = 'none';
+            btnLoader.style.display = 'inline-block';
+
+            // Ajouter un style visuel pour indiquer que les champs sont désactivés
+            emailInput.style.opacity = '0.6';
+            passwordInput.style.opacity = '0.6';
+            emailInput.style.cursor = 'not-allowed';
+            passwordInput.style.cursor = 'not-allowed';
+        });
+    </script>
 </body>
 
 </html>

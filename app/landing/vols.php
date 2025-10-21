@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../../config/config.php';
 require_once __DIR__ . '/../../config/db.php';
 
 // Récupérer les critères de recherche
@@ -133,7 +134,7 @@ include 'layouts/header.php';
                                         </div>
                                     <?php endif; ?>
 
-                                    <a href="../../app/auth/connexion.php"
+                                    <a href="<?= url('app/auth/connexion.php') ?>"
                                        style="display: inline-block; padding: 0.75rem 1.5rem; background: #3b82f6; color: white; text-decoration: none; border-radius: 0.5rem; font-weight: 600;">
                                         Connexion pour réserver
                                     </a>

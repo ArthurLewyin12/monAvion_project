@@ -36,7 +36,7 @@ $user_type_label = match ($_SESSION['user_type']) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Première connexion - MonVolEnLigne</title>
-    <link rel="stylesheet" href="/public/main.css">
+    <link rel="stylesheet" href="<?= asset('main.css') ?>">
     <link rel="stylesheet" href="assets/css/auth.css">
 </head>
 

@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . '/../../config/config.php'; ?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -5,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Devenir Compagnie Partenaire - MonVolEnLigne</title>
-    <link rel="stylesheet" href="/public/main.css">
+    <link rel="stylesheet" href="<?= asset('main.css') ?>">
     <link rel="stylesheet" href="assets/css/demande-partner.css">
 </head>
 
@@ -14,7 +15,7 @@
         <!-- PARTIE GAUCHE : Formulaire -->
         <div class="partner-form-side">
             <!-- Bouton retour -->
-            <a href="/app/landing/index.php" class="back-button" title="Retour à l'accueil">
+            <a href="<?= url('app/landing/index.php') ?>" class="back-button" title="Retour à l'accueil">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M19 12H5M12 19l-7-7 7-7" />
                 </svg>
