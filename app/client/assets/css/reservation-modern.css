@@ -1,0 +1,429 @@
+/* ===================================
+   PAGE DE RÉSERVATION MODERNE
+   =================================== */
+
+.reservation-modern-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Page header */
+.page-header-modern {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #667eea;
+    font-weight: 600;
+    text-decoration: none;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.back-link:hover {
+    color: #764ba2;
+    gap: 0.75rem;
+}
+
+.back-link svg {
+    width: 20px;
+    height: 20px;
+}
+
+.page-title-modern {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #2d3748;
+    margin-bottom: 0.5rem;
+}
+
+.page-subtitle-modern {
+    font-size: 1.125rem;
+    color: #718096;
+}
+
+/* Grid principal */
+.reservation-grid {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 2rem;
+    align-items: start;
+}
+
+/* Cards modernes */
+.card-modern {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+.card-header-modern {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.5rem 2rem;
+    background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.card-icon {
+    width: 24px;
+    height: 24px;
+    color: #667eea;
+}
+
+.card-title-modern {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin: 0;
+}
+
+.card-body-modern {
+    padding: 2rem;
+}
+
+/* Flight summary moderne */
+.flight-summary-modern {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.flight-route-modern {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+}
+
+.route-point {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.route-time {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2d3748;
+}
+
+.route-airport {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #667eea;
+}
+
+.route-date {
+    font-size: 0.875rem;
+    color: #718096;
+}
+
+.route-visual-modern {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.route-line-modern {
+    flex: 1;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+}
+
+.route-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.route-plane-icon {
+    width: 32px;
+    height: 32px;
+    color: #667eea;
+}
+
+.route-duration-modern {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #718096;
+    white-space: nowrap;
+}
+
+.flight-meta-modern {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid #f7fafc;
+}
+
+.meta-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.meta-label {
+    font-size: 0.75rem;
+    color: #a0aec0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+.meta-value {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #2d3748;
+}
+
+/* Form grid */
+.form-grid-modern {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.form-group-input {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-label-input {
+    font-weight: 600;
+    color: #4a5568;
+    font-size: 0.875rem;
+}
+
+.form-input-field {
+    padding: 0.875rem 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 1rem;
+    color: #2d3748;
+    transition: all 0.3s ease;
+}
+
+.form-input-field:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+}
+
+/* Sidebar */
+.reservation-sidebar {
+    position: relative;
+}
+
+.sticky-card {
+    position: sticky;
+    top: 2rem;
+}
+
+/* Price breakdown */
+.price-breakdown {
+    margin-bottom: 1.5rem;
+}
+
+.price-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    color: #4a5568;
+}
+
+.price-divider {
+    height: 2px;
+    background: #e2e8f0;
+    margin: 0.5rem 0;
+}
+
+.price-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2d3748;
+}
+
+/* Payment */
+.payment-info {
+    margin-bottom: 1.5rem;
+}
+
+.payment-label {
+    font-weight: 600;
+    color: #4a5568;
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+}
+
+.payment-methods-modern {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.payment-option-modern {
+    display: flex;
+    cursor: pointer;
+}
+
+.payment-option-modern input[type="radio"] {
+    display: none;
+}
+
+.payment-label-modern {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    background: #f7fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    font-weight: 600;
+    color: #4a5568;
+    transition: all 0.3s ease;
+}
+
+.payment-label-modern svg {
+    width: 20px;
+    height: 20px;
+}
+
+.payment-option-modern input[type="radio"]:checked + .payment-label-modern {
+    background: #e6f0ff;
+    border-color: #667eea;
+    color: #667eea;
+}
+
+.payment-option-modern:hover .payment-label-modern {
+    border-color: #cbd5e0;
+}
+
+.payment-notice {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background: #fef3c7;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    color: #92400e;
+    line-height: 1.4;
+}
+
+.payment-notice svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+/* Bouton de confirmation */
+.btn-confirm-modern {
+    width: 100%;
+    padding: 1.25rem 2rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.125rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+.btn-confirm-modern svg {
+    width: 24px;
+    height: 24px;
+}
+
+.btn-confirm-modern:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(102, 126, 234, 0.5);
+}
+
+.btn-confirm-modern:active {
+    transform: translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .reservation-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .sticky-card {
+        position: static;
+    }
+
+    .reservation-sidebar {
+        order: -1;
+    }
+
+    .form-grid-modern {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .page-title-modern {
+        font-size: 1.75rem;
+    }
+
+    .card-body-modern {
+        padding: 1.5rem;
+    }
+
+    .card-header-modern {
+        padding: 1rem 1.5rem;
+    }
+
+    .flight-route-modern {
+        flex-direction: column;
+    }
+
+    .route-visual-modern {
+        width: 2px;
+        min-height: 60px;
+    }
+
+    .route-line-modern {
+        width: 2px;
+        flex: 1;
+        background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .flight-meta-modern {
+        grid-template-columns: 1fr;
+    }
+
+    .route-time {
+        font-size: 1.5rem;
+    }
+}
